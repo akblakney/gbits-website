@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Statistics — gbits</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="shell">
+    <div class="brand">gbits</div>
+    <nav class="primary">
+      <a href="index.html">Home</a>
+      <a href="bits.html">Get Bits</a>
+      <a href="stats.html" aria-current="page">Stats</a>
+      <a href="beacon.html">Beacon</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="shell">
+    <h2>Statistics</h2>
+    <h1>Randomness test results</h1>
+    <p class="lede">
+      Every hour of archived data is run through a battery of statistical
+      randomness tests. Results are computed once, then cached forever —
+      archived data never changes, so neither do its test results.
+    </p>
+
+    <div class="panel">
+      <h2>Latest completed hour</h2>
+      <div class="status" id="hourStatus"></div>
+      <div id="hourResult" style="display:none;">
+        <dl class="kv">
+          <dt>Hour (UTC)</dt>
+          <dd id="hourStart">—</dd>
+          <dt>Bytes tested</dt>
+          <dd id="hourBytes">—</dd>
+        </dl>
+        <table class="pvals" id="hourTable">
+          <thead><tr><th>Test</th><th>Metric</th><th>Value</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Latest completed day</h2>
+      <div class="status" id="dayStatus"></div>
+      <div id="dayResult" style="display:none;">
+        <dl class="kv">
+          <dt>Day (UTC)</dt>
+          <dd id="dayDate">—</dd>
+          <dt>Total bytes</dt>
+          <dd id="dayBytes">—</dd>
+          <dt>Hours included</dt>
+          <dd id="dayHours">—</dd>
+        </dl>
+        <table class="pvals" id="dayTable">
+          <thead><tr><th>Test</th><th>Metric</th><th>Samples</th><th>Range</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="shell">
+    <span>gbits — public entropy service</span>
+    <span id="apiBaseFooter"></span>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+  document.getElementById("apiBaseFooter").textContent = API_BASE.replace("https://", "");
+
+  function flattenTests(testsObj, prefix = "") {
+    // Flattens the hourly stats "tests" object into rows of
+    // { name, key, value }, only for entries that look like a leaf
+    // metric (an object containing a numeric field), skipping anything
+    // without a clean single value to show (e.g. longest_run).
+    const rows = [];
+    for (const [key, val] of Object.entries(testsObj || {})) {
+      if (key === "label" || typeof val !== "object" || val === null) continue;
+      if ("p_value" in val) {
+        rows.push({ name: prefix + key, metric: "p_value", value: val.p_value });
+      } else if ("delta" in val) {
+        rows.push({ name: prefix + key, metric: "delta", value: val.delta });
+      } else {
+        // Recurse one level for nested groups like byte_level / bit_level
+        rows.push(...flattenTests(val, prefix + key + "."));
+      }
+    }
+    return rows;
+  }
+
+  (async () => {
+    const el = document.getElementById("hourStatus");
+    setStatus(el, "loading", "Loading latest hour…");
+    try {
+      const hour = await apiGet("/stats/hour");
+      document.getElementById("hourStart").textContent = formatTimestamp(hour.hour_start_utc);
+      document.getElementById("hourBytes").textContent = formatBytes(hour.num_bytes_tested);
+
+      const tbody = document.querySelector("#hourTable tbody");
+      tbody.innerHTML = "";
+      for (const row of flattenTests(hour.tests)) {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td class="mono">${row.name}</td><td class="mono">${row.metric}</td><td class="mono">${row.value}</td>`;
+        tbody.appendChild(tr);
+      }
+
+      document.getElementById("hourResult").style.display = "block";
+      setStatus(el, "", "");
+    } catch (err) {
+      setStatus(el, "error", err.message);
+    }
+  })();
+
+  (async () => {
+    const el = document.getElementById("dayStatus");
+    setStatus(el, "loading", "Loading latest day…");
+    try {
+      const day = await apiGet("/stats/day");
+      document.getElementById("dayDate").textContent = day.day_utc || "—";
+      document.getElementById("dayBytes").textContent = formatBytes(day.total_bytes);
+      document.getElementById("dayHours").textContent =
+        `${(day.hours_included || []).length} included, ${(day.hours_missing || []).length} missing`;
+
+      const tbody = document.querySelector("#dayTable tbody");
+      tbody.innerHTML = "";
+      for (const [name, info] of Object.entries(day.tests || {})) {
+        const values = info.values || [];
+        const range = values.length
+          ? `${Math.min(...values).toFixed(4)} – ${Math.max(...values).toFixed(4)}`
+          : "—";
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td class="mono">${name}</td><td class="mono">${info.metric}</td><td class="mono">${values.length}</td><td class="mono">${range}</td>`;
+        tbody.appendChild(tr);
+      }
+
+      document.getElementById("dayResult").style.display = "block";
+      setStatus(el, "", "");
+    } catch (err) {
+      setStatus(el, "error", err.message);
+    }
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get Bits — gbits</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="shell">
+    <div class="brand">gbits</div>
+    <nav class="primary">
+      <a href="index.html">Home</a>
+      <a href="bits.html" aria-current="page">Get Bits</a>
+      <a href="stats.html">Stats</a>
+      <a href="beacon.html">Beacon</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="shell">
+    <h2>Get Bits</h2>
+    <h1>Request random bytes</h1>
+    <p class="lede">
+      Bytes are drawn from data generated in the last 60 seconds and are
+      never retained after being served — request them again and you'll
+      get a fresh, different batch.
+    </p>
+
+    <div class="panel">
+      <form id="bitsForm">
+        <div class="field-row">
+          <div class="field">
+            <label for="numBytes">Number of bytes</label>
+            <input type="number" id="numBytes" name="numBytes" value="64" min="1" step="1">
+          </div>
+          <div class="check">
+            <input type="checkbox" id="includePlot" name="includePlot">
+            <label for="includePlot" style="text-transform:none;letter-spacing:0;font-size:13px;">Include waveform plot</label>
+          </div>
+          <button type="submit" id="submitBtn">Request bytes</button>
+        </div>
+      </form>
+
+      <div class="status" id="bitsStatus"></div>
+
+      <div class="result" id="bitsResult" style="display:none;">
+        <dl class="kv">
+          <dt>Bytes returned</dt>
+          <dd id="resNumBytes">—</dd>
+          <dt>Pairs kept</dt>
+          <dd id="resPairsKept">—</dd>
+          <dt>Pairs discarded</dt>
+          <dd id="resPairsDiscarded">—</dd>
+        </dl>
+        <div class="hexblock" id="resHex"></div>
+        <img class="plot-img" id="resPlot" style="display:none;" alt="Waveform of the microphone samples used to generate this batch">
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="shell">
+    <span>gbits — public entropy service</span>
+    <span id="apiBaseFooter"></span>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+  document.getElementById("apiBaseFooter").textContent = API_BASE.replace("https://", "");
+
+  const form = document.getElementById("bitsForm");
+  const submitBtn = document.getElementById("submitBtn");
+  const statusEl = document.getElementById("bitsStatus");
+  const resultEl = document.getElementById("bitsResult");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const numBytes = document.getElementById("numBytes").value || 64;
+    const includePlot = document.getElementById("includePlot").checked;
+
+    submitBtn.disabled = true;
+    resultEl.style.display = "none";
+    setStatus(statusEl, "loading", "Requesting bytes…");
+
+    try {
+      const data = await apiGet(`/bits?num_bytes=${encodeURIComponent(numBytes)}&plot=${includePlot}`);
+
+      document.getElementById("resNumBytes").textContent = formatBytes(data.num_bytes);
+      document.getElementById("resPairsKept").textContent = formatBytes(data.pairs_kept);
+      document.getElementById("resPairsDiscarded").textContent = formatBytes(data.pairs_discarded);
+      document.getElementById("resHex").textContent = formatHex(data.bytes);
+
+      const plotImg = document.getElementById("resPlot");
+      if (data.audio_plot_png_base64) {
+        plotImg.src = "data:image/png;base64," + data.audio_plot_png_base64;
+        plotImg.style.display = "block";
+      } else {
+        plotImg.style.display = "none";
+      }
+
+      resultEl.style.display = "block";
+      setStatus(statusEl, "", "");
+    } catch (err) {
+      setStatus(statusEl, "error", err.message);
+    } finally {
+      submitBtn.disabled = false;
+    }
+  });
+</script>
+
+</body>
+</html>
