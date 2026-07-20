@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Statistics — gbits</title>
+<title>Statistics — goobits</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -25,9 +25,16 @@
     <h2>Statistics</h2>
     <h1>Randomness test results</h1>
     <p class="lede">
-      Every hour of archived data is run through a battery of statistical
-      randomness tests. Results are computed once, then cached forever —
-      archived data never changes, so neither do its test results.
+      Every hour of archived data is run through several statistical
+      tests. The purpose of these tests is to detect any statistical anomalies,
+      i.e. significant deviations from what we would expect to see from truly
+      random data. For each completed hour, an hourly summary of p-values is shown
+      for the tests; and for each completed day a list of p-values by hour is shown.
+      While no single set of test results definitively proves the data are random or non-random,
+      consistent anomalies (such as very low p-values, e.g. < 0.001) indicate there may be some
+      non-random pattern in the generated data. Conversely, consistent tests without such anomalies
+      (or, with such anomalies occuring at roughly the expected non-zero rate) give confidence that the
+      generator is working correctly and the data are random.
     </p>
 
     <div class="panel">

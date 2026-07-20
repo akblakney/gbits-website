@@ -24,10 +24,11 @@
   <div class="shell">
     <h1>Randomness Beacon</h1>
     <p class="lede">
-      A new 512-bit pulse is published every minute. Each pulse's hash
-      includes the previous pulse's hash, so the full history forms a
-      tamper-evident chain — altering any past pulse would break every
-      hash after it.
+      The randomness beacon provides a source of public randomness
+      that is tamper-evident, ensured via hash-chain. Each minute
+      a 512-bit (64-byte) pulse is published along with the previous
+      pulse's hash, forming a tamper-evident chain. Find the latest pulse
+      here, or search for a pulse by index or by (UTC) timestamp.
     </p>
 
     <div class="panel">
