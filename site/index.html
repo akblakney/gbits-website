@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>gbits — public randomness, generated live</title>
 <meta name="description" content="Random bits generated from ambient microphone noise, served on demand, with an hourly-audited hash-chained beacon.">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -23,48 +23,26 @@
 
 <main>
   <div class="shell">
-    <section class="hero">
-      <h1>Randomness, generated live.</h1>
-      <p class="lede">
-        gbits turns ambient microphone noise into random bits — extracted,
-        tested, and served over a public API. Every byte is either handed
-        to a requester or archived for statistical testing. Nothing is
-        reused.
-      </p>
+    <h1>Randomness, generated live.</h1>
+    <p class="lede">
+      gbits turns ambient microphone noise into random bits — extracted,
+      tested, and served over a public API. Every byte is either handed
+      to a requester or archived for statistical testing. Nothing is
+      reused.
+    </p>
 
-      <div class="counters">
-        <div class="counter">
-          <div class="value" id="bytesServed">—</div>
-          <div class="label">Bytes served to date</div>
-        </div>
-        <div class="counter">
-          <div class="value" id="bytesArchived">—</div>
-          <div class="label">Bytes archived for testing</div>
-        </div>
-      </div>
+    <dl class="metrics">
+      <div><dt>Bytes served to date</dt><dd id="bytesServed">—</dd></div>
+      <div><dt>Bytes archived for testing</dt><dd id="bytesArchived">—</dd></div>
+    </dl>
 
-      <div class="status" id="metricsStatus"></div>
-    </section>
+    <div class="status" id="metricsStatus"></div>
 
-    <div class="strip mono" id="entropyStrip" aria-hidden="true"></div>
-
-    <nav class="cards" aria-label="Site sections">
-      <a class="card" href="bits.html">
-        <div class="tag">Endpoint</div>
-        <h3>Get Bits</h3>
-        <p>Request a fresh batch of random bytes, generated in the last minute.</p>
-      </a>
-      <a class="card" href="stats.html">
-        <div class="tag">Reports</div>
-        <h3>Statistics</h3>
-        <p>Hourly and daily randomness test results, computed on archived data.</p>
-      </a>
-      <a class="card" href="beacon.html">
-        <div class="tag">Beacon</div>
-        <h3>Randomness Beacon</h3>
-        <p>A public, hash-chained pulse published every minute. Verifiable, tamper-evident.</p>
-      </a>
-    </nav>
+    <ul class="section-links">
+      <li><a href="bits.html">Get Bits</a><span class="desc">Request a fresh batch of random bytes</span></li>
+      <li><a href="stats.html">Statistics</a><span class="desc">Hourly and daily randomness test results</span></li>
+      <li><a href="beacon.html">Beacon</a><span class="desc">Public, hash-chained pulse published every minute</span></li>
+    </ul>
   </div>
 </main>
 
@@ -75,9 +53,8 @@
   </div>
 </footer>
 
-<script src="js/script.js"></script>
+<script src="script.js"></script>
 <script>
-  fillEntropyStrip(document.getElementById("entropyStrip"));
   document.getElementById("apiBaseFooter").textContent = API_BASE.replace("https://", "");
 
   const statusEl = document.getElementById("metricsStatus");

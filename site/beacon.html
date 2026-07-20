@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beacon — gbits</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="shell">
+    <div class="brand">gbits</div>
+    <nav class="primary">
+      <a href="index.html">Home</a>
+      <a href="bits.html">Get Bits</a>
+      <a href="stats.html">Stats</a>
+      <a href="beacon.html" aria-current="page">Beacon</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="shell">
+    <h1>Randomness Beacon</h1>
+    <p class="lede">
+      A new 512-bit pulse is published every minute. Each pulse's hash
+      includes the previous pulse's hash, so the full history forms a
+      tamper-evident chain — altering any past pulse would break every
+      hash after it.
+    </p>
+
+    <div class="panel">
+      <h2>Latest pulse</h2>
+      <div class="status" id="latestStatus"></div>
+      <div class="result" id="latestResult" style="display:none;">
+        <dl class="kv">
+          <dt>Pulse index</dt><dd id="latestIndex">—</dd>
+          <dt>Timestamp (UTC)</dt><dd id="latestTs">—</dd>
+          <dt>Previous hash</dt><dd id="latestPrevHash">—</dd>
+          <dt>Pulse hash</dt><dd id="latestHash">—</dd>
+        </dl>
+        <div class="hexblock" id="latestOutput"></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Look up by index</h2>
+      <form id="indexForm">
+        <div class="field-row">
+          <div class="field">
+            <label for="pulseIndex">Pulse index</label>
+            <input type="number" id="pulseIndex" name="pulseIndex" min="0" step="1" placeholder="0">
+          </div>
+          <button type="submit">Look up</button>
+        </div>
+      </form>
+      <div class="status" id="indexStatus"></div>
+      <div class="result" id="indexResult" style="display:none;">
+        <dl class="kv">
+          <dt>Pulse index</dt><dd id="indexIndex">—</dd>
+          <dt>Timestamp (UTC)</dt><dd id="indexTs">—</dd>
+          <dt>Previous hash</dt><dd id="indexPrevHash">—</dd>
+          <dt>Pulse hash</dt><dd id="indexHash">—</dd>
+        </dl>
+        <div class="hexblock" id="indexOutput"></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Look up by timestamp</h2>
+      <p class="lede" style="margin-bottom:16px;">Enter a UTC timestamp. Rounds down to the pulse covering that minute.</p>
+      <form id="timestampForm">
+        <div class="field-row">
+          <div class="field">
+            <label for="pulseTs">Timestamp (e.g. 2026-07-15T14:05:00Z)</label>
+            <input type="text" id="pulseTs" name="pulseTs" placeholder="YYYY-MM-DDTHH:MM:SSZ">
+          </div>
+          <button type="submit">Look up</button>
+        </div>
+      </form>
+      <div class="status" id="tsStatus"></div>
+      <div class="result" id="tsResult" style="display:none;">
+        <dl class="kv">
+          <dt>Pulse index</dt><dd id="tsIndex">—</dd>
+          <dt>Timestamp (UTC)</dt><dd id="tsTs">—</dd>
+          <dt>Previous hash</dt><dd id="tsPrevHash">—</dd>
+          <dt>Pulse hash</dt><dd id="tsHash">—</dd>
+        </dl>
+        <div class="hexblock" id="tsOutput"></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="shell">
+    <span>gbits — public entropy service</span>
+    <span id="apiBaseFooter"></span>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+  document.getElementById("apiBaseFooter").textContent = API_BASE.replace("https://", "");
+
+  function renderPulse(prefix, pulse) {
+    document.getElementById(prefix + "Index").textContent = pulse.pulse_index;
+    document.getElementById(prefix + "Ts").textContent = formatTimestamp(pulse.timestamp_utc);
+    document.getElementById(prefix + "PrevHash").textContent = pulse.previous_hash;
+    document.getElementById(prefix + "Hash").textContent = pulse.pulse_hash;
+    document.getElementById(prefix + "Output").textContent = formatHex(pulse.output_value);
+    document.getElementById(prefix + "Result").style.display = "block";
+  }
+
+  // Latest pulse, loaded automatically.
+  (async () => {
+    const el = document.getElementById("latestStatus");
+    setStatus(el, "loading", "Loading latest pulse…");
+    try {
+      const pulse = await apiGet("/beacon/latest");
+      renderPulse("latest", pulse);
+      setStatus(el, "", "");
+    } catch (err) {
+      setStatus(el, "error", err.message);
+    }
+  })();
+
+  // Look up by index.
+  document.getElementById("indexForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const idx = document.getElementById("pulseIndex").value;
+    const el = document.getElementById("indexStatus");
+    document.getElementById("indexResult").style.display = "none";
+
+    if (idx === "") {
+      setStatus(el, "error", "Enter a pulse index.");
+      return;
+    }
+
+    setStatus(el, "loading", "Looking up pulse " + idx + "…");
+    try {
+      const pulse = await apiGet(`/beacon/pulse/${encodeURIComponent(idx)}`);
+      renderPulse("index", pulse);
+      setStatus(el, "", "");
+    } catch (err) {
+      setStatus(el, "error", err.message);
+    }
+  });
+
+  // Look up by timestamp.
+  document.getElementById("timestampForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const ts = document.getElementById("pulseTs").value.trim();
+    const el = document.getElementById("tsStatus");
+    document.getElementById("tsResult").style.display = "none";
+
+    if (ts === "") {
+      setStatus(el, "error", "Enter a timestamp.");
+      return;
+    }
+
+    setStatus(el, "loading", "Looking up pulse for " + ts + "…");
+    try {
+      const pulse = await apiGet(`/beacon/at?timestamp=${encodeURIComponent(ts)}`);
+      renderPulse("ts", pulse);
+      setStatus(el, "", "");
+    } catch (err) {
+      setStatus(el, "error", err.message);
+    }
+  });
+</script>
+
+</body>
+</html>

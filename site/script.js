@@ -1,7 +1,7 @@
 // gbits — shared client-side helpers. No dependencies, no build step.
 
 // EDIT THIS to point at your actual API subdomain before deploying.
-const API_BASE = "https://api.goobguy.com";
+const API_BASE = "https://api.mydomain.com";
 
 /**
  * Fetch JSON from the API, throwing a descriptive Error on any failure
@@ -61,17 +61,4 @@ function formatHex(hex) {
     out += (i + 1) % 4 === 0 ? "  " : " ";
   }
   return out.trim();
-}
-
-/** Populate the decorative entropy strip on the homepage with random hex. */
-function fillEntropyStrip(el, groups = 40) {
-  const chars = "0123456789abcdef";
-  let html = "";
-  for (let i = 0; i < groups; i++) {
-    let group = "";
-    for (let j = 0; j < 4; j++) group += chars[Math.floor(Math.random() * 16)];
-    const hi = Math.random() < 0.2 ? " hi" : "";
-    html += `<span class="${hi.trim()}">${group}</span> `;
-  }
-  el.innerHTML = html;
 }
