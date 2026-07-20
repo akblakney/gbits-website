@@ -25,9 +25,11 @@
     <h2>Get Bits</h2>
     <h1>Request random bytes</h1>
     <p class="lede">
-      Bytes are drawn from data generated in the last 60 seconds and are
-      never retained after being served — request them again and you'll
-      get a fresh, different batch.
+      Request random bytes from the hardware-based generator. Bytes are drawn
+      from the generator from the last 60 seconds and are not retained after being served.
+      Bytes that expire from the generator's pool are archived for statistical testing.
+      The waveform plot shows the raw waveform audio plot from the microphone audio used
+      to generate the bytes you request.
     </p>
 
     <div class="panel">
@@ -65,7 +67,7 @@
 
 <footer class="site">
   <div class="shell">
-    <span>gbits — public entropy service</span>
+    <span>goobits — public entropy service</span>
     <span id="apiBaseFooter"></span>
   </div>
 </footer>
