@@ -1,6 +1,3 @@
-// gbits — shared client-side helpers. No dependencies, no build step.
-
-// EDIT THIS to point at your actual API subdomain before deploying.
 const API_BASE = "https://api.goobguy.com";
 
 /**

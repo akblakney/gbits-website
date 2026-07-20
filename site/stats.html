@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Statistics — gbits</title>
+<title>Statistics — goobits</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header class="site">
   <div class="shell">
-    <div class="brand">gbits</div>
+    <div class="brand">goobits</div>
     <nav class="primary">
       <a href="index.html">Home</a>
       <a href="bits.html">Get Bits</a>
@@ -60,7 +60,7 @@
           <dd id="dayHours">—</dd>
         </dl>
         <table class="pvals" id="dayTable">
-          <thead><tr><th>Test</th><th>Metric</th><th>Samples</th><th>Range</th></tr></thead>
+          <thead><tr><th>Test</th><th>Metric</th><th>Values by hour (UTC)</th></tr></thead>
           <tbody></tbody>
         </table>
       </div>
@@ -86,71 +86,3 @@
     // without a clean single value to show (e.g. longest_run).
     const rows = [];
     for (const [key, val] of Object.entries(testsObj || {})) {
-      if (key === "label" || typeof val !== "object" || val === null) continue;
-      if ("p_value" in val) {
-        rows.push({ name: prefix + key, metric: "p_value", value: val.p_value });
-      } else if ("delta" in val) {
-        rows.push({ name: prefix + key, metric: "delta", value: val.delta });
-      } else {
-        // Recurse one level for nested groups like byte_level / bit_level
-        rows.push(...flattenTests(val, prefix + key + "."));
-      }
-    }
-    return rows;
-  }
-
-  (async () => {
-    const el = document.getElementById("hourStatus");
-    setStatus(el, "loading", "Loading latest hour…");
-    try {
-      const hour = await apiGet("/stats/hour");
-      document.getElementById("hourStart").textContent = formatTimestamp(hour.hour_start_utc);
-      document.getElementById("hourBytes").textContent = formatBytes(hour.num_bytes_tested);
-
-      const tbody = document.querySelector("#hourTable tbody");
-      tbody.innerHTML = "";
-      for (const row of flattenTests(hour.tests)) {
-        const tr = document.createElement("tr");
-        tr.innerHTML = `<td class="mono">${row.name}</td><td class="mono">${row.metric}</td><td class="mono">${row.value}</td>`;
-        tbody.appendChild(tr);
-      }
-
-      document.getElementById("hourResult").style.display = "block";
-      setStatus(el, "", "");
-    } catch (err) {
-      setStatus(el, "error", err.message);
-    }
-  })();
-
-  (async () => {
-    const el = document.getElementById("dayStatus");
-    setStatus(el, "loading", "Loading latest day…");
-    try {
-      const day = await apiGet("/stats/day");
-      document.getElementById("dayDate").textContent = day.day_utc || "—";
-      document.getElementById("dayBytes").textContent = formatBytes(day.total_bytes);
-      document.getElementById("dayHours").textContent =
-        `${(day.hours_included || []).length} included, ${(day.hours_missing || []).length} missing`;
-
-      const tbody = document.querySelector("#dayTable tbody");
-      tbody.innerHTML = "";
-      for (const [name, info] of Object.entries(day.tests || {})) {
-        const values = info.values || [];
-        const range = values.length
-          ? `${Math.min(...values).toFixed(4)} – ${Math.max(...values).toFixed(4)}`
-          : "—";
-        const tr = document.createElement("tr");
-        tr.innerHTML = `<td class="mono">${name}</td><td class="mono">${info.metric}</td><td class="mono">${values.length}</td><td class="mono">${range}</td>`;
-        tbody.appendChild(tr);
-      }
-
-      document.getElementById("dayResult").style.display = "block";
-      setStatus(el, "", "");
-    } catch (err) {
-      setStatus(el, "error", err.message);
-    }
-  })();
-</script>
-
-</body>
-</html>
