@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Statistics — goobits</title>
+<title>Statistics — gbits</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header class="site">
   <div class="shell">
-    <div class="brand">goobits</div>
+    <div class="brand">gbits</div>
     <nav class="primary">
       <a href="index.html">Home</a>
       <a href="bits.html">Get Bits</a>
@@ -86,3 +86,87 @@
     // without a clean single value to show (e.g. longest_run).
     const rows = [];
     for (const [key, val] of Object.entries(testsObj || {})) {
+      if (key === "label" || typeof val !== "object" || val === null) continue;
+      if ("p_value" in val) {
+        rows.push({ name: prefix + key, metric: "p_value", value: val.p_value });
+      } else if ("delta" in val) {
+        rows.push({ name: prefix + key, metric: "delta", value: val.delta });
+      } else {
+        // Recurse one level for nested groups like byte_level / bit_level
+        rows.push(...flattenTests(val, prefix + key + "."));
+      }
+    }
+    return rows;
+  }
+
+  /**
+   * Format a test's full value list, one entry per hour it was
+   * computed for. If the value count matches hours_included exactly
+   * (the normal case -- this test ran in every included hour), pairs
+   * each value with its hour label ("00=0.7396"). If a test is
+   * missing from some hour (rare -- see stats architecture notes),
+   * the counts won't line up positionally, so falls back to a plain
+   * list without hour labels rather than mislabeling values.
+   */
+  function formatDailyValues(values, hoursIncluded) {
+    if (!values || values.length === 0) return "—";
+    if (values.length === hoursIncluded.length) {
+      return values.map((v, i) => `${hoursIncluded[i]}=${v}`).join("  ");
+    }
+    return values.join(", ");
+  }
+
+  (async () => {
+    const el = document.getElementById("hourStatus");
+    setStatus(el, "loading", "Loading latest hour…");
+    try {
+      const hour = await apiGet("/stats/hour");
+      document.getElementById("hourStart").textContent = formatTimestamp(hour.hour_start_utc);
+      document.getElementById("hourBytes").textContent = formatBytes(hour.num_bytes_tested);
+
+      const tbody = document.querySelector("#hourTable tbody");
+      tbody.innerHTML = "";
+      for (const row of flattenTests(hour.tests)) {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td class="mono">${row.name}</td><td class="mono">${row.metric}</td><td class="mono">${row.value}</td>`;
+        tbody.appendChild(tr);
+      }
+
+      document.getElementById("hourResult").style.display = "block";
+      setStatus(el, "", "");
+    } catch (err) {
+      setStatus(el, "error", err.message);
+    }
+  })();
+
+  (async () => {
+    const el = document.getElementById("dayStatus");
+    setStatus(el, "loading", "Loading latest day…");
+    try {
+      const day = await apiGet("/stats/day");
+      const hoursIncluded = day.hours_included || [];
+
+      document.getElementById("dayDate").textContent = day.day_utc || "—";
+      document.getElementById("dayBytes").textContent = formatBytes(day.total_bytes);
+      document.getElementById("dayHours").textContent =
+        `${hoursIncluded.length} included, ${(day.hours_missing || []).length} missing`;
+
+      const tbody = document.querySelector("#dayTable tbody");
+      tbody.innerHTML = "";
+      for (const [name, info] of Object.entries(day.tests || {})) {
+        const values = info.values || [];
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td class="mono">${name}</td><td class="mono">${info.metric}</td><td class="mono" style="white-space:normal;">${formatDailyValues(values, hoursIncluded)}</td>`;
+        tbody.appendChild(tr);
+      }
+
+      document.getElementById("dayResult").style.display = "block";
+      setStatus(el, "", "");
+    } catch (err) {
+      setStatus(el, "error", err.message);
+    }
+  })();
+</script>
+
+</body>
+</html>
