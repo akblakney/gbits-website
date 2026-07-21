@@ -59,3 +59,31 @@ function formatHex(hex) {
   }
   return out.trim();
 }
+
+function hexToBytes(hex) {
+  const bytes = [];
+  for (let i = 0; i < hex.length; i += 2) {
+    bytes.push(parseInt(hex.substr(i, 2), 16));
+  }
+  return bytes;
+}
+
+// Printable ASCII, excluding space: '!' (33) through '~' (126). 94 characters.
+const ASCII_CHARSET = Array.from({ length: 94 }, (_, i) => String.fromCharCode(33 + i)).join("");
+
+const ALPHANUMERIC_CHARSET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+function bytesToCharset(bytes, charset) {
+  const n = charset.length;
+  const maxUsable = Math.floor(256 / n) * n;
+  let out = "";
+  for (const b of bytes) {
+    if (b < maxUsable) out += charset[b % n];
+  }
+  return out;
+}
+
+function rejectionRate(charsetLength) {
+  const maxUsable = Math.floor(256 / charsetLength) * charsetLength;
+  return ((256 - maxUsable) / 256 * 100).toFixed(1);
+}

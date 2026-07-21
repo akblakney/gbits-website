@@ -59,6 +59,13 @@
           <dd id="resPairsDiscarded">—</dd>
         </dl>
         <div class="hexblock" id="resHex"></div>
+
+        <h2 style="margin-top:20px;">ASCII text</h2>
+        <div class="hexblock" id="resAscii"></div>
+
+        <h2 style="margin-top:20px;">Alphanumeric</h2>
+        <div class="hexblock" id="resAlnum"></div>
+
         <img class="plot-img" id="resPlot" style="display:none;" alt="Waveform of the microphone samples used to generate this batch">
       </div>
     </div>
@@ -98,6 +105,14 @@
       document.getElementById("resPairsKept").textContent = formatBytes(data.pairs_kept);
       document.getElementById("resPairsDiscarded").textContent = formatBytes(data.pairs_discarded);
       document.getElementById("resHex").textContent = formatHex(data.bytes);
+
+      const rawBytes = hexToBytes(data.bytes);
+
+      const asciiOut = bytesToCharset(rawBytes, ASCII_CHARSET);
+      document.getElementById("resAscii").textContent = asciiOut || "(no characters -- try requesting more bytes)";
+
+      const alnumOut = bytesToCharset(rawBytes, ALPHANUMERIC_CHARSET);
+      document.getElementById("resAlnum").textContent = alnumOut || "(no characters -- try requesting more bytes)";
 
       const plotImg = document.getElementById("resPlot");
       if (data.audio_plot_png_base64) {
