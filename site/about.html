@@ -68,11 +68,12 @@
         in an interation of the test. The simplest example would be the
         <a href="https://csrc.nist.gov/Projects/Random-Bit-Generation/Documentation-and-Software/Guide-to-the-Statistical-Tests">frequency monobits test</a>.
         In short, if the proportion of ones and zeros in a bit stream is too extreme (so extreme that we'd observe it, say, less than 0.01% of the time)
-        in truly random data, it raises suspicion. No single p-value (or even groups of p-values) themselves invalidate a TRNG or "prove" they are not random;
+        in truly random data, it raises suspicion. No single p-value (or even groups of p-values) itself invalidates a TRNG or "proves" it is not random,
         but a generator that consistently "fails" such tests (e.g. below a certain threshold) can be called into question.
 
         The most common and accessible set of randomness tests is the NIST test suite linked above, and the <a href="stats.html">live stats</a> page
-        tracks these tests on an hourly and daily basis on archived data from the generator.
+        tracks these tests on an hourly and daily basis on archived data from the generator. For more rigorous statistical testing of Goobits, see
+        <a href="stats-reports.html">this archive</a> of statistical tests that are run manually with larger data sets.
     </p>
 
   </div>
