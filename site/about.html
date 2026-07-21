@@ -25,73 +25,12 @@
   <div class="shell">
     <h1>About Goobits</h1>
     <p class="lede">
-      Request random bytes from the hardware-based generator. Bytes are drawn
-      from the generator from the last 60 seconds and are not retained after being served.
-      Bytes that expire from the generator's pool are archived for statistical testing.
-      The waveform plot shows the raw waveform audio plot from the microphone audio used
-      to generate the bytes you request.
+        Goobits is a <a href="https://en.wikipedia.org/wiki/Hardware_random_number_generator">hardware random number generator</a>
     </p>
 
   </div>
 </main>
 
-<script src="script.js"></script>
-<script>
-
-  const form = document.getElementById("bitsForm");
-  const submitBtn = document.getElementById("submitBtn");
-  const statusEl = document.getElementById("bitsStatus");
-  const resultEl = document.getElementById("bitsResult");
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const numBytes = document.getElementById("numBytes").value || 64;
-    const includePlot = document.getElementById("includePlot").checked;
-
-    submitBtn.disabled = true;
-    resultEl.style.display = "none";
-    setStatus(statusEl, "loading", "Requesting bytes…");
-
-    try {
-      const data = await apiGet(`/bits?num_bytes=${encodeURIComponent(numBytes)}&plot=${includePlot}`);
-
-      document.getElementById("resNumBytes").textContent = formatBytes(data.num_bytes);
-      document.getElementById("resPairsKept").textContent = formatBytes(data.pairs_kept);
-      document.getElementById("resPairsDiscarded").textContent = formatBytes(data.pairs_discarded);
-      document.getElementById("resHex").textContent = formatHex(data.bytes);
-
-      const rawBytes = hexToBytes(data.bytes);
-
-      const asciiOut = bytesToCharset(rawBytes, ASCII_CHARSET);
-      document.getElementById("resAscii").textContent = asciiOut || "(no characters -- try requesting more bytes)";
-
-      const alnumOut = bytesToCharset(rawBytes, ALPHANUMERIC_CHARSET);
-      document.getElementById("resAlnum").textContent = alnumOut || "(no characters -- try requesting more bytes)";
-
-      const plotImg = document.getElementById("resPlot");
-      const zoomImg = document.getElementById("zoomPlot");
-      if (data.audio_plot_png_base64) {
-        plotImg.src = "data:image/png;base64," + data.audio_plot_png_base64;
-        plotImg.style.display = "block";
-
-        zoomImg.src = "data:image/png;base64," + data.zoom_plot;
-        zoomImg.style.display = "block";
-      } else {
-        plotImg.style.display = "none";
-        zoomImg.style.display = "none";
-      }
-
-
-      resultEl.style.display = "block";
-      setStatus(statusEl, "", "");
-    } catch (err) {
-      setStatus(statusEl, "error", err.message);
-    } finally {
-      submitBtn.disabled = false;
-    }
-  });
-</script>
 
 </body>
 </html>
