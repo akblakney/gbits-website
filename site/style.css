@@ -10,7 +10,7 @@
 
   --mono: ui-monospace, Consolas, Menlo, monospace;
   --sans: system-ui, -apple-system, "Segoe UI", sans-serif;
-  --max-width: 700px;
+  --max-width: 1700px;
 }
 
 * { box-sizing: border-box; }
@@ -75,7 +75,7 @@ p.lede { color: var(--text-dim); max-width: 158ch; margin: 0 0 28px; }
 /* ---- homepage: plain text metrics + plain link list ---- */
 
 .metrics { font-family: var(--mono); font-size: 14px; margin: 20px 0 32px; }
-.metrics dt { color: var(--text-dim); display: inline-block; width: 220px; }
+.metrics dt { color: var(--text-dim); display: inline-block; width: 260px; }
 .metrics dd { display: inline; margin: 0; color: var(--text); }
 .metrics div { margin-bottom: 4px; }
 

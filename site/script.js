@@ -48,16 +48,8 @@ function formatTimestamp(iso) {
   }
 }
 
-/** Chunk a hex string into byte-pairs with a space every 4 bytes, for readability. */
 function formatHex(hex) {
-  if (!hex) return "";
-  const bytePairs = hex.match(/.{1,2}/g) || [];
-  let out = "";
-  for (let i = 0; i < bytePairs.length; i++) {
-    out += bytePairs[i];
-    out += (i + 1) % 4 === 0 ? "  " : " ";
-  }
-  return out.trim();
+  return hex;
 }
 
 function hexToBytes(hex) {
