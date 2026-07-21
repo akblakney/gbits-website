@@ -1,16 +1,17 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Get Bits — gbits</title>
+<title>About — gbits</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header class="site">
   <div class="shell">
-    <div class="brand">gbits</div>
+    <div class="brand">goobits</div>
     <nav class="primary">
       <a href="index.html">Home</a>
       <a href="bits.html" aria-current="page">Get Bits</a>
@@ -22,8 +23,7 @@
 
 <main>
   <div class="shell">
-    <h2>Get Bits</h2>
-    <h1>Request random bytes</h1>
+    <h1>About Goobits</h1>
     <p class="lede">
       Request random bytes from the hardware-based generator. Bytes are drawn
       from the generator from the last 60 seconds and are not retained after being served.
@@ -32,44 +32,6 @@
       to generate the bytes you request.
     </p>
 
-    <div class="panel">
-      <form id="bitsForm">
-        <div class="field-row">
-          <div class="field">
-            <label for="numBytes">Number of bytes</label>
-            <input type="number" id="numBytes" name="numBytes" value="64" min="1" step="1">
-          </div>
-          <div class="check">
-            <input type="checkbox" id="includePlot" name="includePlot">
-            <label for="includePlot" style="text-transform:none;letter-spacing:0;font-size:13px;">Include waveform plot</label>
-          </div>
-          <button type="submit" id="submitBtn">Request bytes</button>
-        </div>
-      </form>
-
-      <div class="status" id="bitsStatus"></div>
-
-      <div class="result" id="bitsResult" style="display:none;">
-        <dl class="kv">
-          <dt>Bytes returned</dt>
-          <dd id="resNumBytes">—</dd>
-          <dt>Pairs kept</dt>
-          <dd id="resPairsKept">—</dd>
-          <dt>Pairs discarded</dt>
-          <dd id="resPairsDiscarded">—</dd>
-        </dl>
-        <div class="hexblock" id="resHex"></div>
-
-        <h2 style="margin-top:20px;">ASCII text</h2>
-        <div class="hexblock" id="resAscii"></div>
-
-        <h2 style="margin-top:20px;">Alphanumeric</h2>
-        <div class="hexblock" id="resAlnum"></div>
-
-        <img class="plot-img" id="resPlot" style="display:none;" alt="Waveform of the microphone samples used to generate this batch">
-        <img class="plot-img" id="zoomPlot" style="display:none;" alt="Zoomed in view">
-      </div>
-    </div>
   </div>
 </main>
 
