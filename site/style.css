@@ -8,7 +8,7 @@
   --accent:    #4fe3b0;
   --error:     #e35f4f;
 
-  --mono: ui-monospace, "SF Mono", "Cascadia Mono", Consolas, Menlo, monospace;
+  --mono: ui-monospace, Consolas, Menlo, monospace;
   --sans: system-ui, -apple-system, "Segoe UI", sans-serif;
   --max-width: 700px;
 }

@@ -67,6 +67,7 @@
         <div class="hexblock" id="resAlnum"></div>
 
         <img class="plot-img" id="resPlot" style="display:none;" alt="Waveform of the microphone samples used to generate this batch">
+        <img class="plot-img" id="zoomPlot" style="display:none;" alt="Zoomed in view">
       </div>
     </div>
   </div>
@@ -115,12 +116,18 @@
       document.getElementById("resAlnum").textContent = alnumOut || "(no characters -- try requesting more bytes)";
 
       const plotImg = document.getElementById("resPlot");
+      const zoomImg = document.getElementById("zoomPlot");
       if (data.audio_plot_png_base64) {
         plotImg.src = "data:image/png;base64," + data.audio_plot_png_base64;
         plotImg.style.display = "block";
+
+        zoomImg.src = "data:image/png;base64" + data.zoom_plot;
+        zoomImg.style.display = "block";
       } else {
         plotImg.style.display = "none";
+        zoomImg.style.display = "none";
       }
+
 
       resultEl.style.display = "block";
       setStatus(statusEl, "", "");
