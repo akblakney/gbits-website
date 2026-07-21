@@ -28,13 +28,50 @@
         Goobits is a <a href="https://en.wikipedia.org/wiki/Hardware_random_number_generator">hardware random number generator</a>
         that uses ambient microphone noise to generate random bits. While computers can serve as good pseudo-random number generators,
         they ultimately use a deterministic alogirhtm to generate random bits (usually initialized by some "truly" random seed sourced
-        from some source of entropy). Hardware RNGs on the other hand generate random bits from a source of physical entropy, making
+        from some source of entropy). Hardware RNGs (also called "true random number generators", or TRNGs) on the other hand generate
+        random bits from a source of physical entropy, making
         them non-deterministic. Per the above Wikipedia page, hardware RNGS should have three key characteristics: a noise source,
         a conditioner, and health tests.
     </p>
     <h2>Noise Source</h2>
     <p class="lede">
-        test
+        Crucially, a TRNG needs a source of entropy--this is what allows the TRNG to generate random bits in lieu of a deterministic alogirhtm.
+        Goobits uses ambient microphone noise as its source of entropy. Even in a seemingly silent environment, the signal produced by a microphone
+        will contain entropy driven by a variety of factors including environmental and thermal noise. When audio is digitized and read into memory
+        by a computer, it will be packed as a series of integers representing the audio waveform. While these integer values themselves are not
+        perfectly random, they have entropy that we can use to generate random bits. In particular, the lower bits of these values have more entropy,
+        since noise rather than signal dominates at this tiny resolution.
+    </p>
+
+    <h2>Conditioner / Randomness Extractor</h2>
+    <p class="lede">
+        As alluded to, these values contain entropy but are not fully random (or maximum entropy) themselves, so a TRNG needs a conditioner to turn
+        this pool of entropy into full entropy random bits and bytes. Goobits uses the
+        <a href="https://en.wikipedia.org/wiki/Randomness_extractor#Von_Neumann_extractor">Von Neumann randomness extractor</a> for this step. This
+        step takes a stream of independent bits that are not necessarily uniformly distributed (50/50 chance of 0 or a 1) and outputs a uniformly
+        distributed bit stream, which is exactly what we're after. Note the independence requirement; any two bits in the original bit stream
+        must not be correlated for the Von Neumann extractor's guarantee to hold. To ensure this, I have tested the autocorrelation between
+        successive bits fed to the extractor, and no evidence of correlation has been found. The next aspect, statistical testing of the TRNG's output,
+        also helps give confidence that this requirement is satisfied.
+    </p>
+    <h2>Health Tests/ Statistical Tests</h2>
+    <p class="lede">
+        Statistical testing is crucial to verify that the output of the TRNG actually resembles random data. There are no statistical tests that "prove"
+        that data is random or not random--precisely because such a concept does not actually make any sense. Any data produced by a TRNG is itself
+        not "random" or "not random"; even a suspicious output heavily biased towards certain values is to be expected from a truly random generator
+        with some probability. Instead, the goal of statistical testing is to identify patterns over lots of data that indicate the TRNG may not be
+        a truly random process; and conversely, to give confidence that the TRNG is working correctly when no such patterns can be identified.
+
+        The most common tool for this is statistical tests with the use of <a href="https://en.wikipedia.org/wiki/P-value">p-values</a>. Under the null
+        hypothesis that the data are truly random, we see how likely it is that we would observe test results at least as extreme as we've observed
+        in an interation of the test. The simplest example would be the
+        <a href="https://csrc.nist.gov/Projects/Random-Bit-Generation/Documentation-and-Software/Guide-to-the-Statistical-Tests">frequency monobits test</a>.
+        In short, if the proportion of ones and zeros in a bit stream is too extreme (so extreme that we'd observe it, say, less than 0.01% of the time)
+        in truly random data, it raises suspicion. No single p-value (or even groups of p-values) themselves invalidate a TRNG or "prove" they are not random;
+        but a generator that consistently "fails" such tests (e.g. below a certain threshold) can be called into question.
+
+        The most common and accessible set of randomness tests is the NIST test suite linked above, and the <a href="stats.html">live stats</a> page
+        tracks these tests on an hourly and daily basis on archived data from the generator.
     </p>
 
   </div>
