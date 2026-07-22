@@ -1,7 +1,8 @@
 ------------------------------------------------------------------------------
 RESULTS FOR THE UNIFORMITY OF P-VALUES AND THE PROPORTION OF PASSING SEQUENCES
 ------------------------------------------------------------------------------
-   Tested 200 bitstreams of length 10 million bitst each
+    Tested 200 bitstreams of length 10 million bits each
+    Used archived data from 2026-07-19 to 2026-07-21    
 ------------------------------------------------------------------------------
  C1  C2  C3  C4  C5  C6  C7  C8  C9 C10  P-VALUE  PROPORTION  STATISTICAL TEST
 ------------------------------------------------------------------------------
