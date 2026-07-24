@@ -146,6 +146,21 @@ button:disabled { background: var(--border); color: var(--text-dim); cursor: not
   overflow-y: auto;
 }
 
+.codeblock {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 12px;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--text);
+  word-break: break-all;
+  line-height: 1.6;
+  max-height: 200px;
+  overflow-y: auto;
+
+}
+
 .plot-img { display: block; max-width: 100%; border: 1px solid var(--border); border-radius: 4px; margin-top: 14px; }
 
 table.pvals { width: 100%; border-collapse: collapse; font-family: var(--mono); font-size: 13px; }

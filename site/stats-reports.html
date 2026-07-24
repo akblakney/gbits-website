@@ -35,9 +35,43 @@
     baseline to compare against. I simply used the python "secrets" module, which uses the OS's CSPRNG, which in my case is Linux's /dev/random, which
     uses <a href="https://en.wikipedia.org/wiki//dev/random">ChaCha20</a>. Below is a preliminary test run: first, 10 separate tests of 100
     bit streams (the default bitstream length of 2^20 was used for all tests), and then four tests of 800 bitstreams.
+    Here are the 100 bit stream tests first:
 
 
-    <div class="hexblock">test test 3</div>
+    <div class="codeblock">
+        ./CSPRNG0.txt:13:       186/188 tests passed successfully both the analyses.
+        ./CSPRNG1.txt:13:       183/188 tests passed successfully both the analyses.
+        ./CSPRNG2.txt:13:       185/188 tests passed successfully both the analyses.
+        ./CSPRNG3.txt:13:       186/188 tests passed successfully both the analyses.
+        ./CSPRNG4.txt:13:       179/188 tests passed successfully both the analyses.
+        ./CSPRNG5.txt:13:       180/188 tests passed successfully both the analyses.
+        ./CSPRNG6.txt:13:       185/188 tests passed successfully both the analyses.
+        ./CSPRNG7.txt:13:       184/188 tests passed successfully both the analyses.
+        ./CSPRNG8.txt:13:       184/188 tests passed successfully both the analyses.
+        ./CSPRNG9.txt:13:       184/188 tests passed successfully both the analyses.
+        ./gbits0.txt:13:        187/188 tests passed successfully both the analyses.
+        ./gbits1.txt:13:        185/188 tests passed successfully both the analyses.
+        ./gbits2.txt:13:        183/188 tests passed successfully both the analyses.
+        ./gbits3.txt:13:        183/188 tests passed successfully both the analyses.
+        ./gbits4.txt:13:        186/188 tests passed successfully both the analyses.
+        ./gbits5.txt:13:        186/188 tests passed successfully both the analyses.
+        ./gbits6.txt:13:        184/188 tests passed successfully both the analyses.
+        ./gbits7.txt:13:        186/188 tests passed successfully both the analyses.
+        ./gbits8.txt:13:        184/188 tests passed successfully both the analyses.
+        ./gbits9.txt:13:        187/188 tests passed successfully both the analyses.
+    </div>
+
+    And the 800 bit stream tests:
+    <div class="codeblock">
+        ./CSPRNG0.txt:13:       188/188 tests passed successfully both the analyses.
+        ./CSPRNG1.txt:13:       187/188 tests passed successfully both the analyses.
+        ./CSPRNG2.txt:13:       187/188 tests passed successfully both the analyses.
+        ./CSPRNG3.txt:13:       188/188 tests passed successfully both the analyses.
+        ./gbits0.txt:13:        188/188 tests passed successfully both the analyses.
+        ./gbits1.txt:13:        188/188 tests passed successfully both the analyses.
+        ./gbits2.txt:13:        188/188 tests passed successfully both the analyses.
+        ./gbits3.txt:13:        187/188 tests passed successfully both the analyses.
+    </div>
 
         <!-- <pre>
         <a href="stats-reports/2026-07-21_NIST.txt">2026-07-21_NIST</a>
