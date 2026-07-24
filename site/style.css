@@ -154,10 +154,9 @@ button:disabled { background: var(--border); color: var(--text-dim); cursor: not
   font-family: var(--mono);
   font-size: 13px;
   color: var(--text);
-  word-break: break-all;
+  overflow-wrap: anywhere;
+  word-break: normal;
   line-height: 1.6;
-  max-height: 1200px;
-  overflow-y: auto;
 }
 
 .plot-img { display: block; max-width: 100%; border: 1px solid var(--border); border-radius: 4px; margin-top: 14px; }
