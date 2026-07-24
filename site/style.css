@@ -156,9 +156,8 @@ button:disabled { background: var(--border); color: var(--text-dim); cursor: not
   color: var(--text);
   word-break: break-all;
   line-height: 1.6;
-  max-height: 200px;
+  max-height: 1200px;
   overflow-y: auto;
-
 }
 
 .plot-img { display: block; max-width: 100%; border: 1px solid var(--border); border-radius: 4px; margin-top: 14px; }
