@@ -24,9 +24,24 @@
 <main>
   <div class="shell">
     <h1>Extensive Statistical Test Results</h1>
-        <pre>
+    This section is still in progress, as doing extensive statistical testing on the RNG requires large amounts of data, and also some choices
+    about which external source code to use. At first I tried to use
+    <a href="https://csrc.nist.gov/Projects/Random-Bit-Generation/Documentation-and-Software">NIST's 800-22</a> test suite,
+    but ran into some flaky tests that failed even on well-known cryptographically secure PRNGs (like the Overlapping tempalte test).
+    Apparently this is a known bug. So I pivoted towards using <a href="https://github.com/arcetri/sts">this improved</a> implementation
+    of the NIST test suite. It does not give as nice of a results breakdown as the original NIST test suite, but it does give
+    succinct summaries about the results (number of tests passed, how many of each category failed). Since a non-zero amount of tests
+    are expected to fail for random data, I decided to run the tests on a state-of-the-art CSPRNG alongside my generator, so we have a
+    baseline to compare against. I simply used the python "secrets" module, which uses the OS's CSPRNG, which in my case is Linux's /dev/random, which
+    uses <a href="https://en.wikipedia.org/wiki//dev/random">ChaCha20</a>. Below is a preliminary test run: first, 10 separate tests of 100
+    bit streams (the default bitstream length of 2^20 was used for all tests), and then four tests of 800 bitstreams.
+
+
+    <div class="hexblock">test test 3</div>
+
+        <!-- <pre>
         <a href="stats-reports/2026-07-21_NIST.txt">2026-07-21_NIST</a>
-        </pre>
+        </pre> -->
 
   </div>
 </main>
