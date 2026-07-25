@@ -58,9 +58,9 @@
     <h2>Health Tests/ Statistical Tests</h2>
     <p class="lede">
         Statistical testing is crucial to verify that the output of the TRNG actually resembles random data. There are no statistical tests that "prove"
-        that data is random or not random--precisely because such a concept does not actually make any sense. Any data produced by a TRNG is itself
-        not "random" or "not random"; even a suspicious output heavily biased towards certain values is to be expected from a truly random generator
-        with some probability. Instead, the goal of statistical testing is to identify patterns over lots of data that indicate the TRNG may not be
+        that data is random or not random. This is because data itself is not random or not random; the processes that produce them are.
+        Statistical testing is a subtle process because even a suspicious output heavily biased towards certain values is to be expected from a truly random generator
+        with some probability. So the goal of statistical testing is to identify patterns over lots of data that indicate the TRNG may not be
         a truly random process; and conversely, to give confidence that the TRNG is working correctly when no such patterns can be identified.
 
         The most common tool for this is statistical tests with the use of <a href="https://en.wikipedia.org/wiki/P-value">p-values</a>. Under the null

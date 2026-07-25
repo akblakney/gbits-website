@@ -29,56 +29,22 @@
     <a href="https://csrc.nist.gov/Projects/Random-Bit-Generation/Documentation-and-Software">NIST's 800-22</a> test suite,
     but ran into some flaky tests that failed even on well-known cryptographically secure PRNGs (like the Overlapping tempalte test).
     Apparently this is a known bug. So I pivoted towards using <a href="https://github.com/arcetri/sts">this improved</a> implementation
-    of the NIST test suite. It does not give as nice of a results breakdown as the original NIST test suite, but it does give
-    succinct summaries about the results (number of tests passed, how many of each category failed). Since a non-zero amount of tests
-    are expected to fail for random data, I decided to run the tests on a state-of-the-art CSPRNG alongside my generator, so we have a
-    baseline to compare against. I simply used the python "secrets" module, which uses the OS's CSPRNG, which in my case is Linux's /dev/random, which
-    uses <a href="https://en.wikipedia.org/wiki//dev/random">ChaCha20</a>. Below is a preliminary test run: first, 10 separate tests of 100
-    bit streams (the default bitstream length of 2^20 was used for all tests), and then four tests of 800 bitstreams.
-    Here are the 100 bit stream tests first:
+    of the NIST test suite. The following files give summary reports on the STS test done on about 1800 bit streams (of default length 2^20 bits).
+    For refernce, I've also ran the test on the output of a state-of-the-art CSPRNG (in this case, Linux's default CSPRNG which uses
+    <a href="https://en.wikipedia.org/wiki//dev/random">ChaCha20</a>). This way we have a baseline of what we should expect the test outputs
+    to look like on random data. The output of the three tests on the Goobits generator give no indication of non-randomness. The overall
+    fail rate of each bitstream was actually below that of the CSPRNG--both of them around 1.005% (compared to the expected fail-rate of 1%)--and
+    the difference between the two being statisticall insignificant. As more data  is archived by the generator I will continue to run more of these
+    extensive tests.
 
-    <pre class="codeblock">
-        ./CSPRNG0.txt:13:       186/188 tests passed successfully both the analyses.
-        ./CSPRNG1.txt:13:       183/188 tests passed successfully both the analyses.
-        ./CSPRNG2.txt:13:       185/188 tests passed successfully both the analyses.
-        ./CSPRNG3.txt:13:       186/188 tests passed successfully both the analyses.
-        ./CSPRNG4.txt:13:       179/188 tests passed successfully both the analyses.
-        ./CSPRNG5.txt:13:       180/188 tests passed successfully both the analyses.
-        ./CSPRNG6.txt:13:       185/188 tests passed successfully both the analyses.
-        ./CSPRNG7.txt:13:       184/188 tests passed successfully both the analyses.
-        ./CSPRNG8.txt:13:       184/188 tests passed successfully both the analyses.
-        ./CSPRNG9.txt:13:       184/188 tests passed successfully both the analyses.
-        ./gbits0.txt:13:        187/188 tests passed successfully both the analyses.
-        ./gbits1.txt:13:        185/188 tests passed successfully both the analyses.
-        ./gbits2.txt:13:        183/188 tests passed successfully both the analyses.
-        ./gbits3.txt:13:        183/188 tests passed successfully both the analyses.
-        ./gbits4.txt:13:        186/188 tests passed successfully both the analyses.
-        ./gbits5.txt:13:        186/188 tests passed successfully both the analyses.
-        ./gbits6.txt:13:        184/188 tests passed successfully both the analyses.
-        ./gbits7.txt:13:        186/188 tests passed successfully both the analyses.
-        ./gbits8.txt:13:        184/188 tests passed successfully both the analyses.
-        ./gbits9.txt:13:        187/188 tests passed successfully both the analyses.
-    </pre>
-
-    And the 800 bit stream tests:
-    <pre class="codeblock">
-        ./CSPRNG0.txt:13:       188/188 tests passed successfully both the analyses.
-        ./CSPRNG1.txt:13:       187/188 tests passed successfully both the analyses.
-        ./CSPRNG2.txt:13:       187/188 tests passed successfully both the analyses.
-        ./CSPRNG3.txt:13:       188/188 tests passed successfully both the analyses.
-        ./gbits0.txt:13:        188/188 tests passed successfully both the analyses.
-        ./gbits1.txt:13:        188/188 tests passed successfully both the analyses.
-        ./gbits2.txt:13:        188/188 tests passed successfully both the analyses.
-        ./gbits3.txt:13:        187/188 tests passed successfully both the analyses.
-    </pre>
-
-    As you can see, in both cases there is no statistical significance in the difference of the test results;
-    both the Goobits generator and the CSPRNG fail the tests at about the same rate, which we can conclude
-    is around the expected rate for random data. Around 400MB was used for this preliminary test.
-
-        <!-- <pre>
-        <a href="stats-reports/2026-07-21_NIST.txt">2026-07-21_NIST</a>
-        </pre> -->
+        <pre>
+        <a href="stats-reports/results00.txt">goobits00.txt</a>
+        <a href="stats-reports/results01.txt">goobits01.txt</a>
+        <a href="stats-reports/results02.txt">goobits02.txt</a>
+        <a href="stats-reports/csprng00.txt">goobits00.txt</a>
+        <a href="stats-reports/csprng01.txt">goobits01.txt</a>
+        <a href="stats-reports/csprng02.txt">goobits02.txt</a>
+        </pre>
 
   </div>
 </main>
