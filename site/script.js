@@ -79,3 +79,29 @@ function rejectionRate(charsetLength) {
   const maxUsable = Math.floor(256 / charsetLength) * charsetLength;
   return ((256 - maxUsable) / 256 * 100).toFixed(1);
 }
+
+document.addEventListener("DOMContentLoaded", async () => {
+
+    const header = document.getElementById("header");
+
+    if (!header)
+        return;
+
+    const response = await fetch("header.html");
+    header.innerHTML = await response.text();
+
+    // Determine current page
+    let current = window.location.pathname.split("/").pop();
+
+    if (current === "")
+        current = "index.html";
+
+    // Highlight current page
+    header.querySelectorAll("nav a").forEach(link => {
+
+        if (link.getAttribute("href") === current)
+            link.setAttribute("aria-current", "page");
+
+    });
+
+});
