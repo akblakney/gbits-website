@@ -34,7 +34,7 @@
         them non-deterministic. Per the above Wikipedia page, hardware RNGS should have three key characteristics: a noise source,
         a conditioner, and health tests.
     </p>
-    <h2>Noise Source</h2>
+    <h4>Noise Source</h4>
     <p class="lede">
         Crucially, a TRNG needs a source of entropy--this is what allows the TRNG to generate random bits in lieu of a deterministic alogirhtm.
         Goobits uses ambient microphone noise as its source of entropy. Even in a seemingly silent environment, the signal produced by a microphone
@@ -44,7 +44,7 @@
         since noise rather than signal dominates at this tiny resolution.
     </p>
 
-    <h2>Conditioner / Randomness Extractor</h2>
+    <h4>Conditioner / Randomness Extractor</h4>
     <p class="lede">
         As alluded to, these values contain entropy but are not fully random (or maximum entropy) themselves, so a TRNG needs a conditioner to turn
         this pool of entropy into full entropy random bits and bytes. Goobits uses the
@@ -55,7 +55,7 @@
         successive bits fed to the extractor, and no evidence of correlation has been found. The next aspect, statistical testing of the TRNG's output,
         also helps give confidence that this requirement is satisfied.
     </p>
-    <h2>Health Tests/ Statistical Tests</h2>
+    <h4>Health Tests/ Statistical Tests</h4>
     <p class="lede">
         Statistical testing is crucial to verify that the output of the TRNG actually resembles random data. There are no statistical tests that "prove"
         that data is random or not random. This is because data itself is not random or not random; the processes that produce them are.
@@ -74,6 +74,10 @@
         The most common and accessible set of randomness tests is the NIST test suite linked above, and the <a href="stats.html">live stats</a> page
         tracks these tests on an hourly and daily basis on archived data from the generator. For more rigorous statistical testing of Goobits, see
         <a href="stats-reports.html">this archive</a> of statistical tests that are run manually with larger data sets.
+    </p>
+    <h3>Randomness Beacon</h3>
+    <p calss="lede">
+      Randomness beacon ...
     </p>
 
   </div>
