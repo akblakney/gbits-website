@@ -78,31 +78,7 @@
 
   </div>
 
-  <div class="hexblock" id="latestPulseOutput"></div>
-
 </main>
-
-<script src="script.js"></script>
-<script>
-
-  function renderPulse(pulse) {
-    document.getElementById("latestPulseOutput").textContent = formatHex(pulse.output_value);
-  }
-
-  (async () => {
-    const el = document.getElementById("latestStatus");
-  //  setStatus(el, "loading", "Loading latest pulse…");
-    try {
-      const pulse = await apiGet("/beacon/latest");
-      renderPulse(pulse);
-//      setStatus(el, "", "");
-    } catch (err) {
- //     setStatus(el, "error", err.message);
-    }
-  })();
-
-
-</script>
 
 </body>
 </html>
