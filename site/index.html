@@ -45,10 +45,10 @@
         <dt>Timestamp (UTC)</dt><dd id="pulseTimestamp">_</dd>
       </dl>
       <div class="hexblock" id="latestPulseOutput"></div>
-    </div>
-
-    <div class="card">
-        <canvas id="walk" width="600" height="600"></canvas>
+      <h2>Visual Representation (Random Walk)</h2>
+      <div class="card">
+          <canvas id="walk" width="600" height="600"></canvas>
+      </div>
     </div>
 
   </div>
@@ -192,24 +192,24 @@
       //
       // Start marker (green)
       //
-      drawCircle(
-          margin + (points[0].x - minX) * scale,
-          margin + (points[0].y - minY) * scale,
-          6,
-          "#33cc66"
-      );
+      // drawCircle(
+      //     margin + (points[0].x - minX) * scale,
+      //     margin + (points[0].y - minY) * scale,
+      //     6,
+      //     "#33cc66"
+      // );
 
       //
       // End marker (red)
       //
       const end = points[points.length - 1];
 
-      drawCircle(
-          margin + (end.x - minX) * scale,
-          margin + (end.y - minY) * scale,
-          6,
-          "#ff5555"
-      );
+      // drawCircle(
+      //     margin + (end.x - minX) * scale,
+      //     margin + (end.y - minY) * scale,
+      //     6,
+      //     "#ff5555"
+      // );
 
       function drawCircle(x, y, r, color)
       {
