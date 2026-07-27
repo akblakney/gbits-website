@@ -39,11 +39,17 @@
     </dl>
 
     <div class="status" id="metricsStatus"></div>
+    <div class="panel">
+      <h2>Latest Beacon Pulse</h2>
+      <dl class="kv">
+        <dt>Timestamp (UTC)</dt><dd id="pulseTimestamp">_</dd>
+      </dl>
+      <div class="hexblock" id="latestPulseOutput"></div>
+    </div>
 
-  <div class="hexblock" id="latestPulseOutput"></div>
-<div class="card">
-    <canvas id="walk" width="600" height="600"></canvas>
-</div>
+    <div class="card">
+        <canvas id="walk" width="600" height="600"></canvas>
+    </div>
 
   </div>
 
@@ -67,6 +73,7 @@
   })();
 
   function renderPulse(pulse) {
+    document.getElementById("pulseTimestamp").textContent = formatTimestamp(pulse.timestamp_utc)
     document.getElementById("latestPulseOutput").textContent = formatHex(pulse.output_value);
     drawRandomWalk(pulse.output_value)
   }
