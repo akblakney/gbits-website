@@ -1,0 +1,56 @@
+======================================================================
+improved STS randomness test summary
+======================================================================
+Input file:       /home/adam/gbits-testing/0000-00-00_2026-07-26/gbits_00
+Input size:       131,072,000 bytes
+Bitstream length: 1,048,576 bits (sts default)
+Bitstreams run:   1,000
+Results dir:      /tmp/sts_results_xbws3tph
+
+----------------------------------------------------------------------
+Overall summary (from result.txt)
+----------------------------------------------------------------------
+	187/188 tests passed successfully both the analyses.
+ - The "Frequency" test passed both the analyses.
+ - The "Block Frequency" test passed both the analyses.
+ - The "Cumulative Sums" (forward) test passed both the analyses.
+   The "Cumulative Sums" (backward) test passed both the analyses.
+ - The "Runs" test passed both the analyses.
+ - The "Longest Run of Ones" test passed both the analyses.
+ - The "Binary Matrix Rank" test passed both the analyses.
+ - The "Discrete Fourier Transform" test passed both the analyses.
+ - 147/148 of the "Non-overlapping Template Matching" tests passed both the analyses.
+   1/148 of the "Non-overlapping Template Matching" tests FAILED the proportion analysis.
+ - The "Overlapping Template Matching" test passed both the analyses.
+ - The "Maurer's Universal Statistical" test passed both the analyses.
+ - The "Approximate Entropy" test passed both the analyses.
+ - 8/8 of the "Random Excursions" tests passed both the analyses.
+ - 18/18 of the "Random Excursions Variant" tests passed both the analyses.
+ - The "Serial" (first) test passed both the analyses.
+   The "Serial" (second) test passed both the analyses.
+ - The "Linear Complexity" test passed both the analyses.
+
+----------------------------------------------------------------------
+Per-test breakdown (15 test(s) found)
+----------------------------------------------------------------------
+Test                              Success   Fail  Total   Fail %  p-value Flag
+------------------------------------------------------------------------------
+ApproximateEntropy                    986     14   1000    1.40% 0.134435 
+BlockFrequency                        986     14   1000    1.40% 0.134435 
+CumulativeSums                       1984     16   2000    0.80% 0.844783 
+DFT                                   988     12   1000    1.20% 0.302650 
+Frequency                             989     11   1000    1.10% 0.416959 
+LinearComplexity                      989     11   1000    1.10% 0.416959 
+LongestRun                            991      9   1000    0.90% 0.668313 
+NonOverlappingTemplate             146488   1512 148000    1.02% 0.204880 
+OverlappingTemplate                   992      8   1000    0.80% 0.781137 
+RandomExcursions                     4758     50   4808    1.04% 0.409651 
+RandomExcursionsVariant             10742     76  10818    0.70% 0.999554 
+Rank                                  988     12   1000    1.20% 0.302650 
+Runs                                  988     12   1000    1.20% 0.302650 
+Serial                               1984     16   2000    0.80% 0.844783 
+Universal                             991      9   1000    0.90% 0.668313 
+
+Note: expected fail rate is ~1% per test.'UNUSUAL' flags tests whose fail count is more than 3.0 standard deviations above that expectation.
+p-value gives the probability of seeing at LEAST as many failures for each testunder the assumption of random data.
+======================================================================

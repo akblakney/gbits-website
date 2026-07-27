@@ -1,16 +1,16 @@
 ======================================================================
 improved STS randomness test summary
 ======================================================================
-Input file:       /home/adam/test/csprng1.bin
-Input size:       235,929,600 bytes
+Input file:       /home/adam/gbits-testing/0000-00-00_2026-07-26/gbits_05
+Input size:       131,072,000 bytes
 Bitstream length: 1,048,576 bits (sts default)
-Bitstreams run:   1,800
-Results dir:      /tmp/sts_results_a7iwqarn
+Bitstreams run:   1,000
+Results dir:      /tmp/sts_results_n_zkxbny
 
 ----------------------------------------------------------------------
 Overall summary (from result.txt)
 ----------------------------------------------------------------------
-	186/188 tests passed successfully both the analyses.
+	188/188 tests passed successfully both the analyses.
  - The "Frequency" test passed both the analyses.
  - The "Block Frequency" test passed both the analyses.
  - The "Cumulative Sums" (forward) test passed both the analyses.
@@ -19,13 +19,11 @@ Overall summary (from result.txt)
  - The "Longest Run of Ones" test passed both the analyses.
  - The "Binary Matrix Rank" test passed both the analyses.
  - The "Discrete Fourier Transform" test passed both the analyses.
- - 147/148 of the "Non-overlapping Template Matching" tests passed both the analyses.
-   1/148 of the "Non-overlapping Template Matching" tests FAILED the proportion analysis.
+ - 148/148 of the "Non-overlapping Template Matching" tests passed both the analyses.
  - The "Overlapping Template Matching" test passed both the analyses.
  - The "Maurer's Universal Statistical" test passed both the analyses.
  - The "Approximate Entropy" test passed both the analyses.
- - 7/8 of the "Random Excursions" tests passed both the analyses.
-   1/8 of the "Random Excursions" tests FAILED the proportion analysis.
+ - 8/8 of the "Random Excursions" tests passed both the analyses.
  - 18/18 of the "Random Excursions Variant" tests passed both the analyses.
  - The "Serial" (first) test passed both the analyses.
    The "Serial" (second) test passed both the analyses.
@@ -36,21 +34,21 @@ Per-test breakdown (15 test(s) found)
 ----------------------------------------------------------------------
 Test                              Success   Fail  Total   Fail %  p-value Flag
 ------------------------------------------------------------------------------
-ApproximateEntropy                   1784     16   1800    0.89% 0.714532 
-BlockFrequency                       1788     12   1800    0.67% 0.945971 
-CumulativeSums                       3562     38   3600    1.06% 0.390961 
-DFT                                  1779     21   1800    1.17% 0.268475 
-Frequency                            1778     22   1800    1.22% 0.199843 
-LinearComplexity                     1786     14   1800    0.78% 0.858680 
-LongestRun                           1779     21   1800    1.17% 0.268475 
-NonOverlappingTemplate             263647   2753 266400    1.03% 0.042977 
-OverlappingTemplate                  1788     12   1800    0.67% 0.945971 
-RandomExcursions                     8979    117   9096    1.29% 0.004717 
-RandomExcursionsVariant             20273    193  20466    0.94% 0.802689 
-Rank                                 1786     14   1800    0.78% 0.858680 
-Runs                                 1785     15   1800    0.83% 0.793239 
-Serial                               3559     41   3600    1.14% 0.221874 
-Universal                            1778     22   1800    1.22% 0.199843 
+ApproximateEntropy                    991      9   1000    0.90% 0.668313 
+BlockFrequency                        987     13   1000    1.30% 0.207488 
+CumulativeSums                       1973     27   2000    1.35% 0.076854 
+DFT                                   982     18   1000    1.80% 0.013833 
+Frequency                             986     14   1000    1.40% 0.134435 
+LinearComplexity                      992      8   1000    0.80% 0.781137 
+LongestRun                            991      9   1000    0.90% 0.668313 
+NonOverlappingTemplate             146451   1549 148000    1.05% 0.037508 
+OverlappingTemplate                   991      9   1000    0.90% 0.668313 
+RandomExcursions                     5059     45   5104    0.88% 0.820438 
+RandomExcursionsVariant             11368    116  11484    1.01% 0.469249 
+Rank                                  991      9   1000    0.90% 0.668313 
+Runs                                  990     10   1000    1.00% 0.542699 
+Serial                               1983     17   2000    0.85% 0.780224 
+Universal                             987     13   1000    1.30% 0.207488 
 
 Note: expected fail rate is ~1% per test.'UNUSUAL' flags tests whose fail count is more than 3.0 standard deviations above that expectation.
 p-value gives the probability of seeing at LEAST as many failures for each testunder the assumption of random data.
