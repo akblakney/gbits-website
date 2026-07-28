@@ -29,7 +29,11 @@ a { color: var(--accent); }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 code, .mono { font-family: var(--mono); }
 
-.shell { max-width: var(--max-width); margin: 0 auto; padding: 0 200px; }
+.shell {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 clamp(16px, 5vw, 200px);
+}
 
 header.site {
   border-bottom: 1px solid var(--border);
