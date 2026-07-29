@@ -83,8 +83,8 @@ oldh2 {
   border-top: 1px solid var(--border);
 }
 oldh2:first-child { border-top: none; padding-top: 0; }
-oldh2.nostuff {
-  border-top: none; padding-top: 0;
+oldh2.subtitle {
+  border-top: none; padding-top: 0; padding-bottom: 8px;
 }
 
 p.lede { color: var(--text-dim); max-width: 162ch; margin: 0 0 24px; }
