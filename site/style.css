@@ -70,7 +70,11 @@ h1 { font-size: 26px; font-weight: 600; margin: 0 0 10px; }
 h3 { font-size: 20px; font-weight: 600; margin: 1.4em 0 0.5em; }
 h4 { font-size: 16px; font-weight: 600; margin: 1.2em 0 0.4em; }
 
-h2 {
+h1.title {
+  margin-bottom: 2px;
+}
+
+oldh2 {
   font-size: 13px;
   font-weight: 600;
   color: var(--text-dim);
@@ -78,7 +82,7 @@ h2 {
   padding-top: 18px;
   border-top: 1px solid var(--border);
 }
-h2:first-child { border-top: none; padding-top: 0; }
+oldh2:first-child { border-top: none; padding-top: 0; }
 
 p.lede { color: var(--text-dim); max-width: 162ch; margin: 0 0 24px; }
 
