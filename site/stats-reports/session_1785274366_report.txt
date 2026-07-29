@@ -1,0 +1,80 @@
+========================================================================
+Audio entropy source diagnostic: session_1785274366
+========================================================================
+Sample rate:      44100 Hz
+Samples analyzed: 4,409,344
+
+------------------------------------------------------------------------
+Signal level
+------------------------------------------------------------------------
+  Range:                 -32768 to 32767
+  Mean / Std:            -53.94 / 7179.60
+  RMS:                   7179.80
+  Peak (% of full scale): 100.00%
+  Samples near clipping: 0.001%
+
+------------------------------------------------------------------------
+LSB (bit 0)
+------------------------------------------------------------------------
+  Proportion of 1s:      0.499550
+  Shannon entropy:       1.00000 bits  (max: 1.0)
+  Min-entropy:           0.99870 bits  (max: 1.0)
+
+------------------------------------------------------------------------
+Low byte (bits 0-7)
+------------------------------------------------------------------------
+  Shannon entropy:       8.0000 bits  (max: 8.0)
+  Min-entropy:           7.9683 bits  (max: 8.0)
+  Uniformity chi-square: 232.53  (df=255)
+  Uniformity p-value:    0.8404
+
+------------------------------------------------------------------------
+Estimated Von Neumann discard rate (on LSB stream)
+------------------------------------------------------------------------
+  Pairs total:           2,204,672
+  Pairs discarded:       1,101,847  (49.98%)
+  Pairs kept (output):   1,102,825
+
+------------------------------------------------------------------------
+Autocorrelation -- raw samples
+------------------------------------------------------------------------
+  95% significance threshold: +/- 0.00093
+  Largest |autocorrelation|:  0.96032 at lag 1  <-- EXCEEDS THRESHOLD
+  lag = 1: 0.96032  <-- EXCEEDS THRESHOLD
+  lag = 2: 0.93415  <-- EXCEEDS THRESHOLD
+  lag = 4: 0.90562  <-- EXCEEDS THRESHOLD
+  lag = 8: 0.85285  <-- EXCEEDS THRESHOLD
+  lag = 16: 0.78914  <-- EXCEEDS THRESHOLD
+  lag = 32: 0.65596  <-- EXCEEDS THRESHOLD
+  lag = 64: 0.47862  <-- EXCEEDS THRESHOLD
+  lag = 128: 0.30489  <-- EXCEEDS THRESHOLD
+  Mains hum check, 50Hz (lag 882): 0.03783  <-- EXCEEDS THRESHOLD
+  Mains hum check, 60Hz (lag 735): 0.11832  <-- EXCEEDS THRESHOLD
+
+------------------------------------------------------------------------
+Autocorrelation -- LSB stream
+------------------------------------------------------------------------
+  95% significance threshold: +/- 0.00093
+  Largest |autocorrelation|:  -0.00173 at lag 224  <-- EXCEEDS THRESHOLD
+  lag = 1: -0.00061
+  lag = 2: 0.00051
+  lag = 4: 0.00060
+  lag = 8: -0.00039
+  lag = 16: -0.00059
+  lag = 32: -0.00009
+  lag = 64: -0.00077
+  lag = 128: -0.00059
+  Mains hum check, 50Hz (lag 882): -0.00018
+  Mains hum check, 60Hz (lag 735): -0.00011
+
+------------------------------------------------------------------------
+Spectral peaks (top, raw samples)
+------------------------------------------------------------------------
+  Dominance threshold: 30.4x median (scales with recording length)
+     59.16 Hz   797842.4x median power  <-- notably dominant
+     18.53 Hz   582100.8x median power  <-- notably dominant
+     59.26 Hz   562573.7x median power  <-- notably dominant
+    120.00 Hz   498981.1x median power  <-- notably dominant
+     59.22 Hz   366419.4x median power  <-- notably dominant
+
+========================================================================
