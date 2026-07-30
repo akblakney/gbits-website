@@ -84,6 +84,7 @@ oldh2 {
 }
 oldh2:first-child { border-top: none; padding-top: 0; }
 oldh2.subtitle {
+  display: block;
   border-top: none; padding-top: 0; padding-bottom: 8px;
 }
 
