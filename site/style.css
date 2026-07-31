@@ -80,7 +80,7 @@ oldh2 {
   color: var(--text-dim);
   margin: 0 0 10px;
   padding-top: 18px;
-  border-top: 1px solid var(--border);
+  /*border-top: 1px solid var(--border);*/
 }
 oldh2:first-child { border-top: none; padding-top: 0; }
 oldh2.subtitle {
