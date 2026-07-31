@@ -1,0 +1,28 @@
+html {
+    color-scheme: dark;
+}
+
+body {
+    margin: 20px;
+    background: #1d1f21;
+    color: #c5c8c6;
+}
+
+a {
+    color: #81a2be;
+}
+
+code {
+    color: #81a2be;
+}
+
+pre {
+    background: #25282c;
+    padding: 0.75em;
+    overflow-x: auto;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #5c6370;
+}
