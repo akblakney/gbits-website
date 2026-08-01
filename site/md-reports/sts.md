@@ -1,4 +1,4 @@
-# STS report
+# NIST SP 800-22 Test Report
 
 ## Overview
 
@@ -161,86 +161,88 @@ Now for the more in depth results:
 ------------------------ RUN 0 -----------------------------------------------
 Test                              Success   Fail  Total   Fail %  p-value Flag
 ------------------------------------------------------------------------------
-ApproximateEntropy                   9886    114  10000    1.14% 0.089435 
-BlockFrequency                       9896    104  10000    1.04% 0.357146 
-CumulativeSums                      19817    183  20000    0.92% 0.894445 
-DFT                                  9884    116  10000    1.16% 0.062223 
-Frequency                            9909     91  10000    0.91% 0.829873 
-LinearComplexity                     9906     94  10000    0.94% 0.740165 
-LongestRun                           9895    105  10000    1.05% 0.320865 
+ApproximateEntropy                   9886    114   10000    1.14% 0.089435 
+BlockFrequency                       9896    104   10000    1.04% 0.357146 
+CumulativeSums                      19817    183   20000    0.92% 0.894445 
+DFT                                  9884    116   10000    1.16% 0.062223 
+Frequency                            9909     91   10000    0.91% 0.829873 
+LinearComplexity                     9906     94   10000    0.94% 0.740165 
+LongestRun                           9895    105   10000    1.05% 0.320865 
 NonOverlappingTemplate            1465099  14901 1480000    1.01% 0.203075 
-OverlappingTemplate                  9909     91  10000    0.91% 0.829873 
-RandomExcursions                    49995    549  50544    1.09% 0.028324 
-RandomExcursionsVariant            112523   1201 113724    1.06% 0.030518 
-Rank                                 9896    104  10000    1.04% 0.357146 
-Runs                                 9897    103  10000    1.03% 0.394889 
-Serial                              19790    210  20000    1.05% 0.247787 
-Universal                            9876    124  10000    1.24% 0.010893 
+OverlappingTemplate                  9909     91   10000    0.91% 0.829873 
+RandomExcursions                    49995    549   50544    1.09% 0.028324 
+RandomExcursionsVariant            112523   1201  113724    1.06% 0.030518 
+Rank                                 9896    104   10000    1.04% 0.357146 
+Runs                                 9897    103   10000    1.03% 0.394889 
+Serial                              19790    210   20000    1.05% 0.247787 
+Universal                            9876    124   10000    1.24% 0.010893
+TOTAL                             1766178  18090 1784268  1.0139% 0.031862
 ```
 
 ```
 ------------------------ RUN 1 -----------------------------------------------
 Test                              Success   Fail  Total   Fail %  p-value Flag
 ------------------------------------------------------------------------------
-ApproximateEntropy                   9894    106  10000    1.06% 0.286326 
-BlockFrequency                       9887    113  10000    1.13% 0.106060 
-CumulativeSums                      19829    171  20000    0.85% 0.983782 
-DFT                                  9880    120  10000    1.20% 0.027597 
-Frequency                            9906     94  10000    0.94% 0.740165 
-LinearComplexity                     9890    110  10000    1.10% 0.169394 
-LongestRun                           9896    104  10000    1.04% 0.357146 
+ApproximateEntropy                   9894    106   10000    1.06% 0.286326 
+BlockFrequency                       9887    113   10000    1.13% 0.106060 
+CumulativeSums                      19829    171   20000    0.85% 0.983782 
+DFT                                  9880    120   10000    1.20% 0.027597 
+Frequency                            9906     94   10000    0.94% 0.740165 
+LinearComplexity                     9890    110   10000    1.10% 0.169394 
+LongestRun                           9896    104   10000    1.04% 0.357146 
 NonOverlappingTemplate            1465108  14892 1480000    1.01% 0.224677 
-OverlappingTemplate                  9893    107  10000    1.07% 0.253758 
-RandomExcursions                    49579    573  50152    1.14% 0.000897 <-- UNUSUAL
-RandomExcursionsVariant            111836   1006 112842    0.89% 0.999909 
-Rank                                 9878    122  10000    1.22% 0.017592 
-Runs                                 9896    104  10000    1.04% 0.357146 
-Serial                              19795    205  20000    1.03% 0.370626 
-Universal                            9886    114  10000    1.14% 0.089435 
+OverlappingTemplate                  9893    107   10000    1.07% 0.253758 
+RandomExcursions                    49579    573   50152    1.14% 0.000897 <-- UNUSUAL
+RandomExcursionsVariant            111836   1006  112842    0.89% 0.999909 
+Rank                                 9878    122   10000    1.22% 0.017592 
+Runs                                 9896    104   10000    1.04% 0.357146 
+Serial                              19795    205   20000    1.03% 0.370626 
+Universal                            9886    114   10000    1.14% 0.089435
+TOTAL                             1765053  17941 1782994  1.0062% 0.202553
 ```
 
 ```
 ------------------------ RUN 2 -----------------------------------------------
 Test                              Success   Fail  Total   Fail %  p-value Flag
 ------------------------------------------------------------------------------
-ApproximateEntropy                   9910     90  10000    0.90% 0.854899 
-BlockFrequency                       9897    103  10000    1.03% 0.394889 
-CumulativeSums                      19780    220  20000    1.10% 0.084441 
-DFT                                  9877    123  10000    1.23% 0.013894 
-Frequency                            9886    114  10000    1.14% 0.089435 
-LinearComplexity                     9883    117  10000    1.17% 0.051337 
-LongestRun                           9890    110  10000    1.10% 0.169394 
+ApproximateEntropy                   9910     90   10000    0.90% 0.854899 
+BlockFrequency                       9897    103   10000    1.03% 0.394889 
+CumulativeSums                      19780    220   20000    1.10% 0.084441 
+DFT                                  9877    123   10000    1.23% 0.013894 
+Frequency                            9886    114   10000    1.14% 0.089435 
+LinearComplexity                     9883    117   10000    1.17% 0.051337 
+LongestRun                           9890    110   10000    1.10% 0.169394 
 NonOverlappingTemplate            1465082  14918 1480000    1.01% 0.165826 
-OverlappingTemplate                  9913     87  10000    0.87% 0.914972 
-RandomExcursions                    49224    544  49768    1.09% 0.020611 
-RandomExcursionsVariant            110837   1141 111978    1.02% 0.265882 
-Rank                                 9916     84  10000    0.84% 0.954481 
-Runs                                 9913     87  10000    0.87% 0.914972 
-Serial                              19806    194  20000    0.97% 0.674641 
-Universal                            9886    114  10000    1.14% 0.089435 
-
+OverlappingTemplate                  9913     87   10000    0.87% 0.914972 
+RandomExcursions                    49224    544   49768    1.09% 0.020611 
+RandomExcursionsVariant            110837   1141  111978    1.02% 0.265882 
+Rank                                 9916     84   10000    0.84% 0.954481 
+Runs                                 9913     87   10000    0.87% 0.914972 
+Serial                              19806    194   20000    0.97% 0.674641 
+Universal                            9886    114   10000    1.14% 0.089435
+TOTAL                             1763700  18046 1781746  1.0128% 0.043207
 ```
 
 ```
 ------------------------ RUN 3 -----------------------------------------------
 Test                              Success   Fail  Total   Fail %  p-value Flag
 ------------------------------------------------------------------------------
-ApproximateEntropy                   9900    100  10000    1.00% 0.513499 
-BlockFrequency                       9904     96  10000    0.96% 0.669714 
-CumulativeSums                      19806    194  20000    0.97% 0.674641 
-DFT                                  9892    108  10000    1.08% 0.223340 
-Frequency                            9904     96  10000    0.96% 0.669714 
-LinearComplexity                     9894    106  10000    1.06% 0.286326 
-LongestRun                           9907     93  10000    0.93% 0.772395 
+ApproximateEntropy                   9900    100   10000    1.00% 0.513499 
+BlockFrequency                       9904     96   10000    0.96% 0.669714 
+CumulativeSums                      19806    194   20000    0.97% 0.674641 
+DFT                                  9892    108   10000    1.08% 0.223340 
+Frequency                            9904     96   10000    0.96% 0.669714 
+LinearComplexity                     9894    106   10000    1.06% 0.286326 
+LongestRun                           9907     93   10000    0.93% 0.772395 
 NonOverlappingTemplate            1465103  14897 1480000    1.01% 0.212518 
-OverlappingTemplate                  9890    110  10000    1.10% 0.169394 
-RandomExcursions                    49487    545  50032    1.09% 0.024740 
-RandomExcursionsVariant            111511   1061 112572    0.94% 0.975458 
-Rank                                 9891    109  10000    1.09% 0.195194 
-Runs                                 9911     89  10000    0.89% 0.877397 
-Serial                              19813    187  20000    0.94% 0.831132 
-Universal                            9883    117  10000    1.17% 0.051337 
-
+OverlappingTemplate                  9890    110   10000    1.10% 0.169394 
+RandomExcursions                    49487    545   50032    1.09% 0.024740 
+RandomExcursionsVariant            111511   1061  112572    0.94% 0.975458 
+Rank                                 9891    109   10000    1.09% 0.195194 
+Runs                                 9911     89   10000    0.89% 0.877397 
+Serial                              19813    187   20000    0.94% 0.831132 
+Universal                            9883    117   10000    1.17% 0.051337 
+TOTAL                             1764696  17908 1782604  1.0046% 0.269620
 ```
 
 ```
@@ -248,21 +250,22 @@ Universal                            9883    117  10000    1.17% 0.051337
 
 Test                              Success   Fail  Total   Fail %  p-value Flag
 ------------------------------------------------------------------------------
-ApproximateEntropy                   9891    109  10000    1.09% 0.195194 
-BlockFrequency                       9893    107  10000    1.07% 0.253758 
-CumulativeSums                      19817    183  20000    0.92% 0.894445 
-DFT                                  9886    114  10000    1.14% 0.089435 
-Frequency                            9914     86  10000    0.86% 0.930242 
-LinearComplexity                     9902     98  10000    0.98% 0.593206 
-LongestRun                           9910     90  10000    0.90% 0.854899 
+ApproximateEntropy                   9891    109   10000    1.09% 0.195194 
+BlockFrequency                       9893    107   10000    1.07% 0.253758 
+CumulativeSums                      19817    183   20000    0.92% 0.894445 
+DFT                                  9886    114   10000    1.14% 0.089435 
+Frequency                            9914     86   10000    0.86% 0.930242 
+LinearComplexity                     9902     98   10000    0.98% 0.593206 
+LongestRun                           9910     90   10000    0.90% 0.854899 
 NonOverlappingTemplate            1465071  14929 1480000    1.01% 0.144250 
-OverlappingTemplate                  9884    116  10000    1.16% 0.062223 
-RandomExcursions                    49342    594  49936    1.19% 0.000019 <-- UNUSUAL
-RandomExcursionsVariant            111296   1060 112356    0.94% 0.973463 
-Rank                                 9911     89  10000    0.89% 0.877397 
-Runs                                 9907     93  10000    0.93% 0.772395 
-Serial                              19793    207  20000    1.03% 0.318805 
-Universal                            9878    122  10000    1.22% 0.017592 
+OverlappingTemplate                  9884    116   10000    1.16% 0.062223 
+RandomExcursions                    49342    594   49936    1.19% 0.000019 <-- UNUSUAL
+RandomExcursionsVariant            111296   1060  112356    0.94% 0.973463 
+Rank                                 9911     89   10000    0.89% 0.877397 
+Runs                                 9907     93   10000    0.93% 0.772395 
+Serial                              19793    207   20000    1.03% 0.318805 
+Universal                            9878    122   10000    1.22% 0.017592 
+TOTAL                             1764295  17997 1782292  1.0098% 0.095795
 ```
 
 And the overall failure rate across all of these five runs is 0.010095, with
