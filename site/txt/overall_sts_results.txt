@@ -1,0 +1,58 @@
+====================================================================================================
+STS RANDOMNESS TEST COMPARISON: gbits vs CSPRNG (os.urandom/getrandom)
+10 independent runs each, 1000 bitstreams (2^20 bits) per run
+====================================================================================================
+
+-- Overall summary (x/188 tests passed per run) --
+              run00  run01  run02  run03  run04  run05  run06  run07  run08  run09    mean   stdev
+gbits           187    188    187    187    188    188    188    188    188    186  187.50    0.71
+CSPRNG          188    187    187    187    188    187    188    186    185    185  186.80    1.14
+
+-- Per-test pooled results (summed across all 10 runs) --
+Test                        gbits succ  gbits fail   gbits n  gbits %  |    CSPRNG succ  CSPRNG fail  CSPRNG n  CSPRNG %
+----------------------------------------------------------------------------------------------------------------------------------
+ApproximateEntropy               9,876         124    10,000   1.240%  |          9,886          114    10,000    1.140%
+BlockFrequency                   9,887         113    10,000   1.130%  |          9,896          104    10,000    1.040%
+CumulativeSums                  19,776         224    20,000   1.120%  |         19,817          183    20,000    0.915%
+DFT                              9,867         133    10,000   1.330%  |          9,884          116    10,000    1.160%
+Frequency                        9,881         119    10,000   1.190%  |          9,909           91    10,000    0.910%
+LinearComplexity                 9,888         112    10,000   1.120%  |          9,906           94    10,000    0.940%
+LongestRun                       9,909          91    10,000   0.910%  |          9,895          105    10,000    1.050%
+NonOverlappingTemplate       1,464,981      15,019 1,480,000   1.015%  |      1,465,099       14,901 1,480,000    1.007%
+OverlappingTemplate              9,886         114    10,000   1.140%  |          9,909           91    10,000    0.910%
+RandomExcursions                49,771         485    50,256   0.965%  |         49,995          549    50,544    1.086%
+RandomExcursionsVariant        112,055       1,021   113,076   0.903%  |        112,523        1,201   113,724    1.056%
+Rank                             9,898         102    10,000   1.020%  |          9,896          104    10,000    1.040%
+Runs                             9,900         100    10,000   1.000%  |          9,897          103    10,000    1.030%
+Serial                          19,816         184    20,000   0.920%  |         19,790          210    20,000    1.050%
+Universal                        9,906          94    10,000   0.940%  |          9,876          124    10,000    1.240%
+----------------------------------------------------------------------------------------------------------------------------------
+TOTAL                        1,765,297      18,035 1,783,332  1.0113%  |      1,766,178       18,090 1,784,268   1.0139%
+
+-- Two-proportion z-test on pooled fail rates --
+gbits pooled fail rate:  1.0113%  (n=1,783,332)
+CSPRNG pooled fail rate: 1.0139%  (n=1,784,268)
+z = -0.2407, two-tailed p-value = 0.8098
+
+-- Individual p-values < 0.05, count by test (out of 10 runs each) --
+
+gbits: 12/150 test-instances with p<0.05 (expected ~7.5 by chance)
+  DFT                        4/10 runs  (expected ~0.5/10 by chance)
+  OverlappingTemplate        2/10 runs  (expected ~0.5/10 by chance)
+  ApproximateEntropy         2/10 runs  (expected ~0.5/10 by chance)
+  NonOverlappingTemplate     2/10 runs  (expected ~0.5/10 by chance)
+  CumulativeSums             1/10 runs  (expected ~0.5/10 by chance)
+  Frequency                  1/10 runs  (expected ~0.5/10 by chance)
+
+CSPRNG: 17/150 test-instances with p<0.05 (expected ~7.5 by chance)
+  RandomExcursionsVariant    3/10 runs  (expected ~0.5/10 by chance)
+  RandomExcursions           3/10 runs  (expected ~0.5/10 by chance)
+  DFT                        2/10 runs  (expected ~0.5/10 by chance)
+  ApproximateEntropy         2/10 runs  (expected ~0.5/10 by chance)
+  NonOverlappingTemplate     1/10 runs  (expected ~0.5/10 by chance)
+  Rank                       1/10 runs  (expected ~0.5/10 by chance)
+  CumulativeSums             1/10 runs  (expected ~0.5/10 by chance)
+  Frequency                  1/10 runs  (expected ~0.5/10 by chance)
+  Universal                  1/10 runs  (expected ~0.5/10 by chance)
+  BlockFrequency             1/10 runs  (expected ~0.5/10 by chance)
+  Runs                       1/10 runs  (expected ~0.5/10 by chance)

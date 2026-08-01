@@ -1,24 +1,24 @@
 ======================================================================
 improved STS randomness test summary
 ======================================================================
-Input file:       /home/adam/gbits-testing/devrandom/03.bin
-Input size:       131,072,000 bytes
+Input file:       /home/adam/gbits-testing/devrandom03
+Input size:       1,310,720,000 bytes
 Bitstream length: 1,048,576 bits (sts default)
-Bitstreams run:   1,000
-Results dir:      /tmp/sts_results_vxvuvtdv
+Bitstreams run:   10,000
+Results dir:      /tmp/sts_results_hgo67eak
 
 ----------------------------------------------------------------------
 Overall summary (from result.txt)
 ----------------------------------------------------------------------
-	187/188 tests passed successfully both the analyses.
+	185/188 tests passed successfully both the analyses.
  - The "Frequency" test passed both the analyses.
  - The "Block Frequency" test passed both the analyses.
  - The "Cumulative Sums" (forward) test passed both the analyses.
    The "Cumulative Sums" (backward) test passed both the analyses.
  - The "Runs" test passed both the analyses.
  - The "Longest Run of Ones" test passed both the analyses.
- - The "Binary Matrix Rank" test passed both the analyses.
- - The "Discrete Fourier Transform" test passed both the analyses.
+ - The "Binary Matrix Rank" test FAILED the uniformity analysis.
+ - The "Discrete Fourier Transform" test FAILED the uniformity analysis.
  - 147/148 of the "Non-overlapping Template Matching" tests passed both the analyses.
    1/148 of the "Non-overlapping Template Matching" tests FAILED the proportion analysis.
  - The "Overlapping Template Matching" test passed both the analyses.
@@ -35,21 +35,21 @@ Per-test breakdown (15 test(s) found)
 ----------------------------------------------------------------------
 Test                              Success   Fail  Total   Fail %  p-value Flag
 ------------------------------------------------------------------------------
-ApproximateEntropy                    987     13   1000    1.30% 0.207488 
-BlockFrequency                        991      9   1000    0.90% 0.668313 
-CumulativeSums                       1993      7   2000    0.35% 0.999757 
-DFT                                   994      6   1000    0.60% 0.933860 
-Frequency                             996      4   1000    0.40% 0.989927 
-LinearComplexity                      989     11   1000    1.10% 0.416959 
-LongestRun                            986     14   1000    1.40% 0.134435 
-NonOverlappingTemplate             146571   1429 148000    0.97% 0.911326 
-OverlappingTemplate                   991      9   1000    0.90% 0.668313 
-RandomExcursions                     5095     65   5160    1.26% 0.039264 
-RandomExcursionsVariant             11494    116  11610    1.00% 0.516252 
-Rank                                  984     16   1000    1.60% 0.047871 
-Runs                                  986     14   1000    1.40% 0.134435 
-Serial                               1974     26   2000    1.30% 0.111065 
-Universal                             989     11   1000    1.10% 0.416959 
+ApproximateEntropy                   9900    100  10000    1.00% 0.513499 
+BlockFrequency                       9904     96  10000    0.96% 0.669714 
+CumulativeSums                      19806    194  20000    0.97% 0.674641 
+DFT                                  9892    108  10000    1.08% 0.223340 
+Frequency                            9904     96  10000    0.96% 0.669714 
+LinearComplexity                     9894    106  10000    1.06% 0.286326 
+LongestRun                           9907     93  10000    0.93% 0.772395 
+NonOverlappingTemplate            1465103  14897 1480000    1.01% 0.212518 
+OverlappingTemplate                  9890    110  10000    1.10% 0.169394 
+RandomExcursions                    49487    545  50032    1.09% 0.024740 
+RandomExcursionsVariant            111511   1061 112572    0.94% 0.975458 
+Rank                                 9891    109  10000    1.09% 0.195194 
+Runs                                 9911     89  10000    0.89% 0.877397 
+Serial                              19813    187  20000    0.94% 0.831132 
+Universal                            9883    117  10000    1.17% 0.051337 
 
 Note: expected fail rate is ~1% per test.'UNUSUAL' flags tests whose fail count is more than 3.0 standard deviations above that expectation.
 p-value gives the probability of seeing at LEAST as many failures for each testunder the assumption of random data.
