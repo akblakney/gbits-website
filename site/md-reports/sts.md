@@ -120,7 +120,7 @@ statistical significant threshold, but something that catches your eye nonethele
 All in all, the overall results do not point towards anything alarming, *except*
 for the low DFT p-value, and for the fact that six of the tests have p-values
 less than 0.1, whereas we should only expect 1.5 tests to meet this treshold
-on average for random data. Also, only 185/188 overall tests seems a bit low,
+on average for random data. Also, only 185/188 overall tests passed seems a bit low,
 so depending on the methodology to compute those pass/fail rates, that could
 be something worth investigating as well. So to get a better picture we will compare against
 a baseline in the next section.
@@ -128,16 +128,19 @@ a baseline in the next section.
 ### CSPRNG
 
 Now that we've established test results on data from the Goobits generator,
-we'll run the same tests on the output of a CSPRNG that is known to be very strong.
+we'll run the same tests on the output of a CSPRNG that is known to be very strong. I
+use the python `secrets` module to generate the output, which draws directly from the
+OS's CSPRNG, which in my case is Linux's `/dev/random` which uses [ChaCha20](https://en.wikipedia.org/wiki/Salsa20#ChaCha_variant).
 We'll use this as a baseline, and it will contextualize the Goobits results a bit more.
 
 While generating random data from Goobits is slow (about 1kb/s), it is trivial
-to generate GBS of random output from CSPRNGs as they are very fast. As such,
+to generate GBs of random output from CSPRNGs as they are very fast. As such,
 I am able to run tests on even more data than the 10,000 bitstreams that I did on Goobits.
-So, I ran the test suite on four times the data as Goobits, in the form of four tests
+So, I ran the test suite on five times the data as Goobits, in the form of four tests
 on 10,000 bitstreams each. First, here are the "overall" results of each:
 
 ```
+185/188 tests passed successfully both the analyses.
 185/188 tests passed successfully both the analyses.
 185/188 tests passed successfully both the analyses.
 185/188 tests passed successfully both the analyses.
@@ -153,6 +156,27 @@ conclude that this is a property of the test implementation and this
 failure rate is to be expected even on random data.
 
 Now for the more in depth results:
+
+```
+------------------------ RUN 0 -----------------------------------------------
+Test                              Success   Fail  Total   Fail %  p-value Flag
+------------------------------------------------------------------------------
+ApproximateEntropy                   9886    114  10000    1.14% 0.089435 
+BlockFrequency                       9896    104  10000    1.04% 0.357146 
+CumulativeSums                      19817    183  20000    0.92% 0.894445 
+DFT                                  9884    116  10000    1.16% 0.062223 
+Frequency                            9909     91  10000    0.91% 0.829873 
+LinearComplexity                     9906     94  10000    0.94% 0.740165 
+LongestRun                           9895    105  10000    1.05% 0.320865 
+NonOverlappingTemplate            1465099  14901 1480000    1.01% 0.203075 
+OverlappingTemplate                  9909     91  10000    0.91% 0.829873 
+RandomExcursions                    49995    549  50544    1.09% 0.028324 
+RandomExcursionsVariant            112523   1201 113724    1.06% 0.030518 
+Rank                                 9896    104  10000    1.04% 0.357146 
+Runs                                 9897    103  10000    1.03% 0.394889 
+Serial                              19790    210  20000    1.05% 0.247787 
+Universal                            9876    124  10000    1.24% 0.010893 
+```
 
 ```
 ------------------------ RUN 1 -----------------------------------------------
@@ -252,7 +276,7 @@ and not an outlier. Second, the low p-value for the DFT test looks not to be an 
 as we saw two even lower p-values across the CSPRNG tests, with one being a whole order
 of magnitude lower at 0.000019. And finally, the overall high failure rate and corresponding
 low p-value for Goobits now looks more like a slight miscalibration of the test suite
-than something cause by Goobits. Specifically, just as we saw a fail rate closer to
+than something caused by Goobits. Specifically, just as we saw a fail rate closer to
 1.01% for Goobits, we see the same trend with the CSPRNG results at 1.0095%.
 And more importantly, the p-value for the overall failure rate of the CSPRNG is
 actually lower than that of Goobits: 0.002312 compared to .06 (the latter of which
@@ -264,4 +288,21 @@ tests Goobits performs slightly better (in terms of p-value, not raw fail-rate).
 I could go in circles testing more and more CSPRNG data with this test suite,
 the already 50,000 bitstreams of one million bits are already quite strong evidence
 of this trend towards a slightly higher than expected fail-rate and lower p-values,
-and it seems it is likely due to a small miscalibration of the test.
+and it seems it is likely due to a small miscalibration of the test since we see
+these results with a state-of-the-art CSPRNG.
+
+## Conclusion
+
+I ran the improved STS randomness test on 10,000 bitstreams of about one million bits each
+of Goobits-generated data. Taken at face value the results are not particularly indicative of
+a generator defect, as all p-values but one are not below any statistically significant threshold.
+But the one failed p-value and the overall trend towards lower (< 0.1) p-values do raise some concern.
+However, after running the test suite on a state-of-the-art CSPRNG that is known to be a strong
+generator (and whose output is not known to be distinguishable from random), these concerns essentially vanish.
+The low p-value for the DFT test sits alongside two equally or more extreme p-values on the CSPRNG data, and the
+overall trend of low p-values / high test failure-rate is replicated in the CSPRNG results as well.
+In fact, the overall failure-rate p-value for the CSPRNG data (albeit with 5x as much data, which will
+drive any test miscalibration to more severe p-values) is actually an order of magnitude lower
+than that of the Goobits results. Overall, the Goobits results are not statistically distinguishable
+from the CSPRNG results, and hence this test suite did not provide any evidence of non-randomness
+or a defect in the Goobits generator.
