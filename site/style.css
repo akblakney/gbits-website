@@ -8,7 +8,7 @@
   --error:     #ed8274;
 
   --mono: ui-monospace, Consolas, Menlo, monospace;
-  --sans: "Noto Serif", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --sans: "Liberation Sans", "Noto Serif", system-ui, -apple-system, "Segoe UI", sans-serif;
   --max-width: 1060px; /* narrowed for readable line length -- see note below */
 }
 

@@ -70,7 +70,7 @@
       <a href="https://csrc.nist.gov/Projects/interoperable-randomness-beacons/beacon-20">NIST's</a> randomness beacon, and follows a similar
       format and functionality. Every minute, a 512-bit full-entropy bit string is published as a pulse. Each pulse is timestamped, indexed, and hashed,
       along with the previous pulse's hash. This ensures that the chain is not tampered with without being detected. Specifically, if the output
-      value for some index n was modified, then it's hash would change, and every subsequent pulse's hash would change as a result.
+      value for some index n was modified, then its hash would change, and every subsequent pulse's hash would change as a result.
       Similarly, if a user records the hash of the pulse at index n and at a later date that hash remains the same, then they can guarantee
       that the chain up until that pulse was not tampered with, since doing so while maintaing a valid hash-chain would require a
       <a href="https://en.wikipedia.org/wiki/Preimage_attack">preimage attack</a> on SHA-256 which is currently not known to be possible.
