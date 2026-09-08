@@ -56,16 +56,6 @@ nav.primary a[aria-current="page"] { color: var(--accent); }
 
 main { padding: 36px 0 72px; }
 
-footer.site {
-  border-top: 1px solid var(--border);
-  padding: 18px 0;
-  color: var(--text-dim);
-  font-size: 12px;
-}
-footer.site .shell { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
-footer.site .mono { font-family: var(--mono); }
-
-
 h1 { font-size: 26px; font-weight: 600; margin: 0 0 10px; }
 h3 { font-size: 20px; font-weight: 600; margin: 1.4em 0 0.5em; }
 h4 { font-size: 16px; font-weight: 600; margin: 1.2em 0 0.4em; }
