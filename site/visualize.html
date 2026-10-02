@@ -61,13 +61,9 @@
     image.style.display = "none";
 
     try {
-      const response = await fetch("/visualize/walk");
+      const response = await apiGet("/visualize/walk");
 
-      if (!response.ok) {
-        throw new Error(`Server returned ${response.status}`);
-      }
-
-      const data = await response.json();
+      const data = response;
 
       image.src = `data:image/png;base64,${data.walk_plot}`;
       image.style.display = "block";
