@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Visualize — goobits</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="header"></div>
+
+<main>
+<div class="shell">
+
+<h1>Archived Bytes Visualization</h1>
+
+<p class="lede">
+  This page provides a visualization of recently archived bytes in the form
+  of 1- and 2-dimensional <a href="https://en.wikipedia.org/wiki/Random_walk">random walks</a>.
+  Note that unlike the <a href="bits.html">Get Bits</a> page, these visualizations are
+  not unique to you as a user, as they are pulled from the most recently archived chunk.
+</p>
+
+<p id="walk-status">Generating random walk...</p>
+<h2>Raw hex</h2>
+
+<div id="walk-chunk" class="hexblock" style="display: none;"></div>
+
+<h2>Random Walk Visualizations</h2>
+
+<div style="margin-bottom: 2rem;">
+<img
+id="walk-plot-1d"
+alt="1D random walk plot"
+style="display: none; max-width: 100%;"
+>
+</div>
+
+<div style="margin-bottom: 2rem;">
+<img
+id="walk-plot-2d"
+alt="2D random walk plot"
+style="display: none; max-width: 100%;"
+>
+</div>
+
+</div>
+</main>
+
+<script src="script.js"></script>
+
+<script>
+async function loadWalk() {
+  const chunk = document.getElementById("walk-chunk");
+  const image1d = document.getElementById("walk-plot-1d");
+  const image2d = document.getElementById("walk-plot-2d");
+  const status = document.getElementById("walk-status");
+
+  try {
+    const data = await apiGet("/latest-chunk?visualize=True");
+
+    chunk.textContent = data.chunk;
+    chunk.style.display = "block";
+
+    image1d.src = `data:image/png;base64,${data.img_1d}`;
+    image1d.style.display = "block";
+
+    image2d.src = `data:image/png;base64,${data.img_2d}`;
+    image2d.style.display = "block";
+
+    status.textContent = "";
+  } catch (error) {
+    console.error(error);
+    status.textContent = "Failed to generate random walk.";
+  }
+}
+
+loadWalk();
+</script>
+
+</body>
+</html>
