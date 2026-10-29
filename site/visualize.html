@@ -61,7 +61,7 @@ async function loadWalk() {
   try {
     const data = await apiGet("/latest-chunk?visualize=True");
 
-    chunk.textContent = data.chunk;
+    chunk.textContent = data.chunk.data;
     chunk.style.display = "block";
 
     image1d.src = `data:image/png;base64,${data.img_1d}`;
