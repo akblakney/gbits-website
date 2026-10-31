@@ -28,6 +28,8 @@
 
 <div id="walk-chunk" class="hexblock" style="display: none;"></div>
 
+<div id="ascii" class="hexblock" style="display: none;"></div>
+
 <h2>Random Walk Visualizations</h2>
 
 <div style="margin-bottom: 2rem;">
@@ -54,6 +56,7 @@ style="display: none; max-width: 100%;"
 <script>
 async function loadWalk() {
   const chunk = document.getElementById("walk-chunk");
+  const ascii = document.getElementById("asii");
   const image1d = document.getElementById("walk-plot-1d");
   const image2d = document.getElementById("walk-plot-2d");
   const status = document.getElementById("walk-status");
@@ -61,8 +64,15 @@ async function loadWalk() {
   try {
     const data = await apiGet("/latest-chunk?visualize=True");
 
+    const rawBytes = hexToBytes(data.chunk.data)
+    const asciiOut = bytesToCharset(rawBytes, ASCII_CHARSET);
+    //document.getElementById("resAscii").textContent = asciiOut || "(no characters -- try requesting more bytes)";
+
     chunk.textContent = data.chunk.data;
     chunk.style.display = "block";
+
+    ascii.textContent = asciiOut;
+    ascii.style.display = "block";
 
     image1d.src = `data:image/png;base64,${data.img_1d}`;
     image1d.style.display = "block";
