@@ -24,10 +24,11 @@
 </p>
 
 <p id="walk-status">Generating random walk...</p>
-<h2>Raw hex</h2>
 
+<oldh2>Hexadecimal</oldh2>
 <div id="walk-chunk" class="hexblock" style="display: none;"></div>
 
+<oldh2>ASCII</oldh2>
 <div id="ascii" class="hexblock" style="display: none;"></div>
 
 <h2>Random Walk Visualizations</h2>
@@ -56,7 +57,7 @@ style="display: none; max-width: 100%;"
 <script>
 async function loadWalk() {
   const chunk = document.getElementById("walk-chunk");
-  const ascii = document.getElementById("asii");
+  const ascii = document.getElementById("ascii");
   const image1d = document.getElementById("walk-plot-1d");
   const image2d = document.getElementById("walk-plot-2d");
   const status = document.getElementById("walk-status");
